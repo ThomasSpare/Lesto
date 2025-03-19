@@ -1,0 +1,115 @@
+
+h1{
+    font-size: x-large !important;
+    margin-left: 26vw;
+}
+
+.text-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: 'Metropolis', sans-serif;
+    font-weight: 500;
+    font-size: larger;
+    color: #333;
+  }
+
+
+    .quote {
+      font-style: italic;
+      font-size: smaller;
+      margin: 20px;
+      background-color: #ecf5ef;
+      padding: 20px;
+      border-radius: 15px;
+    }
+
+    .WhatIs_list {
+        text-align: justify;
+        align-self: center;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center; 
+        font-family: 'Metropolis', sans-serif;
+        font-weight: 500;
+        /* Override styles from lists.css */
+        font-size: initial;
+        font-weight: initial;
+        list-style: none;
+    }
+
+    li{
+        width: 40vw !important;
+        font-size: medium;
+        font-weight: 500;
+        line-height-step: 1.5;
+        border-style: none;
+        margin: 10px;
+     }
+ 
+  
+  .header {
+    background-color: #6cadef;
+    color: white;
+    display: flex;
+    color: #fafafa;
+    height: 2.5rem;
+    white-space: nowrap;
+  }
+
+  .SubTitle{
+    margin-top: 8vh !important;
+  }
+  
+  .content {
+    flex: 1 1;
+    padding: 20px;
+    height: 101vh;
+    background-size: cover;
+    overflow-x: hidden;
+    background: linear-gradient(142deg, rgba(213, 13, 13, 1) 0%, rgb(25 47 72) 30%, rgba(39, 38, 69, 1) 100%);
+  }
+
+  
+  .text-section {
+    margin-bottom: 20px;
+  }
+
+  #Footer {
+    margin-top: 0vh !important;
+    width: 100vw;
+}
+
+@media screen and (max-width: 900px){
+  .content{
+    background-image: none !important;
+  }
+
+  li{
+      width: 95vw !important;
+  }
+  }
+
+  @media screen and (max-width: 768px) {
+    .text-section {
+        display: flex;
+        margin-bottom: 20px;
+        text-align: justify;
+        line-height: normal;
+        margin-top: 91px;
+        flex-wrap: wrap;
+        flex-direction: column;
+        width: 80%;
+        margin-left: 10%;
+        font-size: xx-large;
+      }
+  
+
+    li {
+      font-size: x-large;  
+  }
+  }
+
+
+
+

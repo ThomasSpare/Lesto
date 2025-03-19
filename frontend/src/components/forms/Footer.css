@@ -1,0 +1,33 @@
+#root > footer > section.d-flex.justify-content-center.justify-content-lg-between.p-4.border-bottom{
+    
+    justify-content: center !important;
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+  }
+
+html, body {
+    height: 100%;
+    margin: 0;
+  }
+
+#Footer{
+    margin-top: 100vh !important;
+}
+
+.footer-logo{
+  width: auto !important;
+  height: 50px !important;
+}
+
+.d-flex {
+    display: block !important;
+}
+
+
+#root > footer > section:nth-child(1) > div > div > div{
+    text-align: left;
+}

@@ -1,0 +1,103 @@
+#root > header > div > header > clr-modal{
+    font-size: x-small;
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: nowrap;
+    align-items: flex-end;
+    color: deepskyblue;
+}
+
+#root > header > div > header > div.currentUser{
+    font-size: x-small;
+    color: deepskyblue;
+}
+
+.header .branding, header .branding {
+  display: block;
+  margin-left: 35vw;
+  height: auto !important;
+}
+
+
+/* Links in Navbar not dropdowns */
+a:link:not(.btn,.nav-link,.dropdown-item,.alert-action,.badge) {
+  line-height: var(--cds-global-space-7);
+  letter-spacing: calc(-.1*(1rem / var(--cds-global-base)));
+  FONT-SIZE: 10px;
+  letter-spacing: 2px;
+  height: 14px;
+  display: flex;
+  align-items: flex-start;
+  font-weight: 800;
+  margin: 2px;
+  color: #68cdff;
+}
+
+a:visited {
+  color: #48bffa !important;
+  text-decoration: none !important;
+}
+
+a:link:not(.btn,.nav-link,.dropdown-item,.alert-action,.badge):hover {
+  color: aquamarine;
+  text-decoration: none;
+}
+
+
+.nav{
+    background-color: #6f0104;
+    box-shadow: none !important;
+}
+
+.btn-link .btn, .btn.btn-link {
+    color: #68cdff !important;
+}
+
+#root > header > div > nav{
+background-color: #153657;
+}
+
+/* Custom styles for the hamburger menu */
+.bm-burger-button {
+    display: none; /* Hide the burger button by default */
+  }
+  
+  .bm-burger-bars {
+    background: #373a47;
+  }
+  
+  .bm-burger-bars-hover {
+    background: #a90000;
+  }
+  
+  .bm-cross-button {
+    height: 24px;
+    width: 24px;
+  }
+  
+  .bm-cross {
+    background: #bdc3c7;
+  }
+  
+  .bm-menu {
+    background: #373a47;
+    padding: 2.5em 1.5em 0;
+    font-size: 1.15em;
+  }
+  
+  .bm-morph-shape {
+    fill: #373a47;
+  }
+  
+  .bm-item-list {
+    color: #b8b7ad;
+    padding: 0.8em;
+  }
+  
+  .bm-item {
+    display: inline-block;
+  }
+  
+  .bm-overlay {
+    background: rgba(0, 0, 0, 0.3);
+  }

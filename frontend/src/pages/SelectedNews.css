@@ -1,0 +1,23 @@
+.news-card{
+    background-color: #f0f8f1;
+    width: 45vw;
+    text-align: justify;
+    padding: 20px;
+    border-radius: 15px;
+}
+
+img{
+    max-width: 42vw;
+}
+
+.news-info{
+    margin-left: 35vw;
+}
+
+.news-date{
+    font-size: small !important;
+}
+
+.news-author{
+    font-size: small !important;
+}

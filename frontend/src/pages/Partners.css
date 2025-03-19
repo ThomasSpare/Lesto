@@ -1,0 +1,123 @@
+
+h1{
+    font-size: x-large !important;
+    margin-left: 26vw;
+}
+
+a {
+    margin-bottom: 4vh;
+}
+
+#root > div > main > div > select {
+    background: #cbe6d3;
+    background-size: cover;
+    border: 1px solid #104853;
+    padding: 10px;
+    font-size: 16px;
+    width: 38vw;
+    color: #225051;
+    line-height: 1.5;
+    transition: background 0.3s ease;
+    margin-top: 87px;
+}
+img{
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+#first_select {
+    margin-top: 2px !important;
+}
+#last_select {
+    margin-top: 38px !important;
+    margin-bottom: 10vh !important;
+}
+
+.partner-box{
+    background-color: #f3f9f4;
+    padding: 10px;
+    margin-bottom: 2vh;
+    border-bottom-right-radius: 1rem;
+    box-shadow: 16px 11px 10px 3px #00000036, 17px 17px 14px 15px #00000000, var(--tw-shadow);
+}
+
+.partners{
+    display: grid;
+    width: 45vw;
+    justify-content: center;
+    justify-items: center;
+}
+.partners-links{
+    display: grid;
+    width: 45vw;
+    justify-content: center;
+    justify-items: center;
+    margin-top: 2vh;
+    margin-bottom: 5vh;
+}
+.Partner_text-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: 'Metropolis', sans-serif;
+    font-weight: 500;
+    font-size: larger;
+    color: #333;
+  }
+
+    .Partners_list {
+        text-align: justify;
+        align-self: center;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center; 
+        font-family: 'Metropolis', sans-serif;
+        font-weight: 500;
+        /* Override styles from lists.css */
+        font-size: initial;
+        font-weight: initial;
+    }
+
+    li{
+        width: 40vw !important;
+        font-size: medium;
+        font-weight: 500;
+        line-height-step: 1.5;
+        border-style: none;
+     }
+    
+
+    .header {
+        background-color: #2fb0ff;
+        color: white;
+        text-align: center;
+    }
+
+  
+  .Partner_content {
+    flex: 1 1;
+    padding: 20px;
+    background-color: #f9f9f9;
+    background-image: url(https://res.cloudinary.com/djunroohl/image/upload/v1726410687/tp244-bg1-08_iibjso.jpg) !important;
+    height: 101vh;
+    background-size: cover;
+    overflow-x: hidden;
+    
+  }
+  
+  .Partner_text-section {
+    margin-bottom: 20px;
+  }
+
+  #Footer {
+    margin-top: 5vh !important;
+    width: 100vw;
+}
+
+@media screen and (max-width: 425px){
+    img {
+        max-width: 100% !important;
+    }
+  }
+
+

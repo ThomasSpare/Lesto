@@ -1,0 +1,59 @@
+p {
+    color: rgb(32, 84, 32);
+}
+
+
+.search-h1{
+    text-align: justify;
+}
+
+.search-input{
+    text-align: center;
+}
+
+.Search-div{
+    margin-top: 3vh;
+    min-height: 100vh;
+}
+
+
+.PublicDocs .pubdocs-search-list-item{
+    list-style: none;
+    height: 50px;
+    width: 75vw !important;
+    font-size: medium;
+    font-weight: 500;
+    line-height-step: 1.5;
+    border-style: none; 
+}
+
+
+li:hover
+{
+    background-color: rgba(0, 255, 255, 0.13);
+    transition: 0.1s;
+}
+
+@media screen and (max-width: 1440px){
+ /* Search Categories  */
+    .Search-div{
+        margin-top: 10vh;
+    }
+  }
+
+@media screen and (max-width: 768px) {
+    #root > div > div > div:nth-child(1){
+        margin-top: 10vh;
+    }
+    button{
+        display: none;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    /* CSS code for screens between 768px and 1024px */
+}
+
+@media screen and (min-width: 1024px) {
+    /* CSS code for screens larger than 1024px */
+}
