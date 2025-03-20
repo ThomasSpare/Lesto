@@ -59,6 +59,7 @@
     "build": "react-scripts build",
     "test": "react-app-rewired test",
     "serve": "serve -s build",
+    "render": "npm install --legacy-peer-deps && npm run build && serve -s build",
     "eject": "react-scripts eject",
     "sentry:sourcemaps": "sentry-cli sourcemaps inject --org damrec-productions --project javascript-react build && sentry-cli sourcemaps upload --org damrec-productions --project javascript-react build"
   },
