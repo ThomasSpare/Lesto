@@ -1,9 +1,10 @@
 {
-  "name": "maste",
+  "name": "lesto",
   "version": "0.1.0",
   "private": true,
   "homepage": "/",
   "dependencies": {
+    "serve": "^14.2.1",
     "@auth0/auth0-react": "^2.2.4",
     "@cds/core": "^6.13.0",
     "@cds/react": "^6.13.0",
@@ -34,7 +35,7 @@
     "jszip": "^3.10.1",
     "mdb-react-ui-kit": "^8.0.0",
     "path-browserify": "^1.0.1",
-    "pdfjs-dist": "^4.4.168",
+    "pdfjs-dist": "3.11.174",
     "pptx2html": "^0.3.4",
     "pptxgenjs": "^3.12.0",
     "pspdfkit": "^2024.4.0",
@@ -43,7 +44,7 @@
     "react": "^18.3.1",
     "react-burger-menu": "^3.0.9",
     "react-country-flag": "^3.1.0",
-    "react-doc-viewer": "^0.1.13",
+    "react-doc-viewer": "0.1.13",
     "react-dom": "^18.3.1",
     "react-marquee": "^1.0.0",
     "react-quill": "^2.0.0",
@@ -57,6 +58,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-app-rewired test",
+    "serve": "serve -s build",
     "eject": "react-scripts eject",
     "sentry:sourcemaps": "sentry-cli sourcemaps inject --org damrec-productions --project javascript-react build && sentry-cli sourcemaps upload --org damrec-productions --project javascript-react build"
   },
@@ -79,9 +81,9 @@
       "last 1 safari version"
     ]
   },
-  "description": "Nuclear Chemistry Chalmers",
+  "description": "Lesto",
   "main": "index.js",
-  "repository": "https://github.com/ThomasSpare/maste_science/tree/main",
+  "repository": "https://github.com/ThomasSpare/Lesto/tree/main",
   "author": "ThomasSpare",
   "license": "no",
   "devDependencies": {
@@ -97,10 +99,12 @@
     "@jridgewell/sourcemap-codec": "^1.4.8",
     "@rollup/plugin-terser": "^0.4.4",
     "autoprefixer": "^10.4.20",
-    "glob": "^9.0.0",
     "postcss": "^8.5.3",
-    "rimraf": "^4.0.0",
-    "svgo": "^2.0.0",
     "tailwindcss": "^3.4.17"
+  },
+  "overrides": {
+    "react-doc-viewer": {
+      "pdfjs-dist": "3.11.174"
+    }
   }
 }
