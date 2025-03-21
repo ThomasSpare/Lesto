@@ -45,7 +45,6 @@
     "react-country-flag": "^3.1.0",
     "react-doc-viewer": "^0.1.13",
     "react-dom": "^18.3.1",
-    "react-fast-marquee": "^1.6.5",
     "react-quill": "^2.0.0",
     "react-router-dom": "^6.23.1",
     "react-scripts": "5.0.1",
@@ -57,7 +56,6 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-app-rewired test",
-    "install": "npm install --legacy-peer-deps",
     "eject": "react-scripts eject",
     "sentry:sourcemaps": "sentry-cli sourcemaps inject --org damrec-productions --project javascript-react build && sentry-cli sourcemaps upload --org damrec-productions --project javascript-react build"
   },
