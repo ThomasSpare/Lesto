@@ -19,7 +19,7 @@ const Deliverabels = () => {
     const navigate = useNavigate();
 
     const api = axios.create({
-        baseURL: process.env.REACT_APP_API_BASE_URL,
+        baseURL: process.env.REACT_APP_API_MOCK === 'true',
     });
 
     useEffect(() => {
@@ -27,7 +27,7 @@ const Deliverabels = () => {
           try {
             const token = await getAccessTokenSilently({
               authorizationParams: {
-                audience: process.env.REACT_APP_AUTH0_AUDIENCE,
+                audience: process.env.REACT_APP_API_MOCK,
                 scope: "read:files read:folders",
               },
             });

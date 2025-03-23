@@ -17,12 +17,50 @@ function Home() {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_API_BASE_URL || ''}/api/news`
-        );
+        // Always provide mock data for static deployment
+        if (process.env.REACT_APP_API_MOCK === 'true') {
+          // Return mock data when no backend is available
+          setNews([
+            {
+              id: 1,
+              title: "Nuclear Research Breakthrough at Chalmers",
+              content: "<p>Scientists at Chalmers University of Technology have made significant progress in Gen IV reactor cooling systems, potentially increasing efficiency by 15%.</p>",
+              image_url: "https://res.cloudinary.com/djunroohl/image/upload/v1739826909/fcpw9zqxs0wwxnmrp62n.svg",
+              created_at: new Date().toISOString()
+            },
+            {
+              id: 2,
+              title: "MÅSTE Project Receives Additional Funding",
+              content: "<p>The MÅSTE initiative has been awarded a substantial grant to expand research into nuclear safety protocols for next-generation reactors.</p>",
+              image_url: "https://via.placeholder.com/300",
+              created_at: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString() // 7 days ago
+            },
+            {
+              id: 3,
+              title: "International Collaboration Expands",
+              content: "<p>Swedish researchers join forces with international partners to accelerate development of sustainable nuclear energy solutions.</p>",
+              image_url: "https://res.cloudinary.com/djunroohl/image/upload/v1739826909/fcpw9zqxs0wwxnmrp62n.svg",
+              created_at: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString() // 14 days ago
+            }
+          ]);
+          return;
+        }
+        
+        // This won't execute in static deployment
+        const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL || ''}/api/news`);
         setNews(response.data);
       } catch (error) {
         console.error("Error fetching news:", error);
+        // Fallback to mock data on error
+        setNews([
+          {
+            id: 1,
+            title: "Nuclear Research Breakthrough",
+            content: "<p>Sample fallback content due to API error.</p>",
+            image_url: "https://res.cloudinary.com/djunroohl/image/upload/v1739826909/fcpw9zqxs0wwxnmrp62n.svg",
+            created_at: new Date().toISOString()
+          }
+        ]);
       }
     };
 
@@ -43,19 +81,19 @@ exploitation of the results.
 It is primary addressed to MSc and PhD students, as main target group, but also
 researchers and other members of the community.
 
-As a keeper and provider of knowledge, WP5 will also host a “LFR simulation
-tools initiative”, where on an open platform the partners will share simulation tools
+As a keeper and provider of knowledge, WP5 will also host a "LFR simulation
+tools initiative", where on an open platform the partners will share simulation tools
 for use and further development.
               </p>
             </div>
             <section className="mt-10">
               <h2 id="blacktext" className="text-2xl font-bold text-gray-800 mb-6">Latest News</h2>
-              {Array.isArray(news) ? (
+              {Array.isArray(news) && news.length > 0 ? (
                 news.map((article) => (
                   <div key={article.id} className="news-article" style={{ marginLeft: "12vw" }}>
                     <img
-                      src={article.image_url}
-                      alt={article.title}
+                      src={article.image_url || "https://res.cloudinary.com/djunroohl/image/upload/v1739826909/fcpw9zqxs0wwxnmrp62n.svg"}
+                      alt={article.title || "News image"}
                       className="news-image"
                       onError={(e) => {
                         e.target.onerror = null;
@@ -66,12 +104,12 @@ for use and further development.
                       <h3>{article.title}</h3>
                       <div
                         dangerouslySetInnerHTML={{
-                          __html: article.content.length > 200
+                          __html: article.content?.length > 200
                             ? `${article.content.substring(0, 200)}...`
-                            : article.content,
+                            : article.content || "<p>Article content unavailable</p>",
                         }}
                       />
-                      <Link to={`/news/${article.id}`}> read more</Link>
+                      <Link to={`/news/${article.id}`} className="read-more-link"> read more</Link>
                       <p className="news-date">
                         {new Date(article.created_at).toLocaleDateString()}
                       </p>
@@ -79,7 +117,7 @@ for use and further development.
                   </div>
                 ))
               ) : (
-                <p>No news available</p>
+                <p className="text-center text-gray-500 italic">No news available</p>
               )}
             </section>
           </section>

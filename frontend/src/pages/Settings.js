@@ -65,7 +65,9 @@ const Dashboard = () => {
   const fetchLastThreePosts = async () => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_BASE_URL}/api/news?limit=3`
+        `${
+          process.env.process.env.REACT_APP_API_MOCK === "true"
+        }/api/news?limit=3`
       );
       setPosts(response.data);
     } catch (error) {
@@ -88,7 +90,7 @@ const Dashboard = () => {
 
     try {
       await axios.post(
-        `${process.env.REACT_APP_API_BASE_URL}/api/news`,
+        `${process.env.process.env.REACT_APP_API_MOCK === "true"}/api/news`,
         formData,
         {
           headers: {
@@ -111,7 +113,9 @@ const Dashboard = () => {
     try {
       const token = await getAccessTokenSilently();
       const response = await axios.delete(
-        `${process.env.REACT_APP_API_BASE_URL}/api/news/${postId}`,
+        `${
+          process.env.process.env.REACT_APP_API_MOCK === "true"
+        }/api/news/${postId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -151,7 +155,9 @@ const Dashboard = () => {
     try {
       const token = await getAccessTokenSilently();
       await axios.put(
-        `${process.env.REACT_APP_API_BASE_URL}/api/news/${editPostId}`,
+        `${
+          process.env.process.env.REACT_APP_API_MOCK === "true"
+        }/api/news/${editPostId}`,
         formData,
         {
           headers: {

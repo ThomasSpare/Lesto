@@ -19,7 +19,7 @@ const WP1 = () => {
   const { getAccessTokenSilently, loginWithRedirect } = useAuth0();
 
   const api = axios.create({
-    baseURL: process.env.REACT_APP_API_BASE_URL,
+    baseURL: process.env.REACT_APP_API_MOCK === 'true',
   });
 
   useEffect(() => {

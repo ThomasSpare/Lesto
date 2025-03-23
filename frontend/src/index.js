@@ -24,7 +24,6 @@ import Auth0ProviderWithHistory from "./Auth/Auth0Provider";
 import DeliverabelsPublic from "./pages/DeliverablesPublic";
 import Deliverabels from "./pages/Deliverables";
 import Contacts from "./pages/Contacts";
-
 import SelectedNews from "./pages/SelectedNews";
 import ViewText from "./pages/ViewText";
 import ContactList from "./pages/ContactLists";

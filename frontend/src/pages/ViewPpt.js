@@ -17,7 +17,7 @@ const ViewPpt = () => {
       console.error("File parameter is undefined.");
       return;
     }
-    const serverAddress = process.env.REACT_APP_API_BASE_URL; // Update this to your server address
+    const serverAddress = process.env.REACT_APP_API_MOCK === "true"; // Update this to your server address
     const url = `${serverAddress}/api/uploads/${fileKey}`;
 
     fetch(url, { signal })

@@ -30,7 +30,7 @@ const ViewPdf = () => {
           },
         });
     
-        const serverAddress = process.env.REACT_APP_API_BASE_URL;
+        const serverAddress = process.env.process.env.REACT_APP_API_MOCK === 'true';
         const url = `${serverAddress}/api/uploads/${s3Key}`;
         
         const response = await fetch(url, {

@@ -23,7 +23,7 @@ const ViewText = () => {
                 return;
             }
 
-            const serverAddress = process.env.REACT_APP_API_BASE_URL;
+            const serverAddress = process.env.REACT_APP_API_MOCK === 'true';
             const url = `${serverAddress}/api/uploads/${fileKey}`;
             
             setFileName(fileKey.split('/').pop());

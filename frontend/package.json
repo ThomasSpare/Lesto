@@ -48,6 +48,7 @@
     "react-quill": "^2.0.0",
     "react-router-dom": "^6.23.1",
     "react-scripts": "5.0.1",
+    "serve": "^14.2.4",
     "util": "^0.12.5",
     "vm-browserify": "^1.1.2",
     "web-vitals": "^2.1.4"
@@ -57,9 +58,9 @@
     "build": "react-scripts build",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject",
-    "sentry:sourcemaps": "sentry-cli sourcemaps inject --org damrec-productions --project javascript-react build && sentry-cli sourcemaps upload --org damrec-productions --project javascript-react build"
+    "serve": "serve -s build",
+    "render": "npm install --legacy-peer-deps && npm run build && serve -s build"  
   },
-  "proxy": "http://localhost:10000",
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -101,5 +102,11 @@
     "rimraf": "^4.0.0",
     "svgo": "^2.0.0",
     "tailwindcss": "^3.4.17"
+  },
+  "overrides": {
+    "react-doc-viewer": {
+      "pdfjs-dist": "3.11.174"
+    }
   }
 }
+
