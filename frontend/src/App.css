@@ -412,6 +412,10 @@ body.dark .WP-img {opacity: 0.8;}
     padding-left: 7rem !important;
 }
 
+.SubTitle{
+margin-top: 10vh !important;
+}
+
 .hamburger-menu {
   display: none;
 }
