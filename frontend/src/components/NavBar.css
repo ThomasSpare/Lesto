@@ -45,8 +45,8 @@ a:link:not(.btn,.nav-link,.dropdown-item,.alert-action,.badge):hover {
 
 
 .nav{
-    background-color: #6f0104;
-    box-shadow: none !important;
+  background: linear-gradient(142deg, rgb(230, 230, 230) 0%, rgba(243, 243, 243, 0.557) 30%, rgba(26, 21, 165, 0.334) 100%);
+  box-shadow: none !important;
 }
 
 .btn-link .btn, .btn.btn-link {

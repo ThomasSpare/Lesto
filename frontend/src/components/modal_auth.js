@@ -58,7 +58,7 @@ const ModalAuth = () => {
         authorizationParams: {
           audience: process.env.REACT_APP_AUTH0_AUDIENCE,
           scope: "openid profile email read:files read:folders",
-          redirect_uri: "https://maste-science-frontend.onrender.com/",
+          redirect_uri: process.env.REACT_APP_AUTH0_REDIRECT_URI,
         },
       });
     } catch (error) {

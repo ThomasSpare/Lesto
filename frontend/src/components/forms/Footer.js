@@ -23,7 +23,7 @@ const Footer = () => {
             <MDBCol md="3" lg="4" xl="3" className="mx-auto mb-4">
               <img
                 className="footer-logo"
-                src={require("../../Assets/images/ENEA.png")}
+                src={`${process.env.PUBLIC_URL}/enea.png`}
                 alt="ENEA logo"
               />
             </MDBCol>

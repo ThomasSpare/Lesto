@@ -75,7 +75,7 @@ svg{
   flex: 1;
   padding: 20px;
   animation: fadeIn 2s ease-in-out;
-  background: linear-gradient(142deg, rgba(213, 13, 13, 1) 0%, rgb(25 47 72) 30%, rgba(39, 38, 69, 1) 100%);
+  background-color:  rgb(25 47 72);
   background-size: cover;
   overflow-x: hidden;
   height: 101vh;

@@ -25,7 +25,8 @@
 }
 
 #root{
-  background: linear-gradient(142deg, rgba(213, 13, 13, 1) 0%, rgb(25 47 72) 30%, rgba(39, 38, 69, 1) 100%);
+  background: linear-gradient(142deg, rgb(230, 230, 230) 0%, rgba(243, 243, 243, 0.557) 30%, rgba(26, 21, 165, 0.334) 100%);
+  height: 1800px !important;
 }
 
 html {
@@ -33,15 +34,15 @@ html {
 }
 
 h2{
-  color: lightgray !important;
+  color: #464646 !important;
 }
 
 li{
-  color: lightgray !important;
+  color: #464646 !important;
 }
 
 p{
-  color: lightgray !important;
+  color: #464646 !important;
 }
 
 #blacktext{
@@ -114,7 +115,7 @@ body {
 
 .header.header {
   height: 6.5rem !important;
-  background-color: #b51317 !important;
+  background-color: white !important;
 }
 
 
@@ -640,6 +641,27 @@ li:hover {
   #root > div {
     text-align: -webkit-center;
 }
+
+#root {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 100vw !important;
+}
+
+.App,
+.main,
+.div,
+.header,
+.container,
+.news-article,
+.content {
+  width: 100% !important;
+  text-align: center;
+  max-width: 100vw !important;
+}
+
   .home-text{
   width: 143vw;
   }
