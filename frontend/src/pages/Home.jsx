@@ -23,9 +23,9 @@ function Home() {
           setNews([
             {
               id: 1,
-              title: "Nuclear Research Breakthrough at Chalmers",
+              title: "Lesto Project Website Launched",
               content: "<p>Scientists at Chalmers University of Technology have made significant progress in Gen IV reactor cooling systems, potentially increasing efficiency by 15%.</p>",
-              image_url: "https://res.cloudinary.com/djunroohl/image/upload/v1739826909/fcpw9zqxs0wwxnmrp62n.svg",
+              image_url: "https://images.app.goo.gl/aYkuW59rTD3cMZK16",
               created_at: new Date().toISOString()
             },
             {
@@ -55,9 +55,9 @@ function Home() {
         setNews([
           {
             id: 1,
-            title: "Nuclear Research Breakthrough",
-            content: "<p>Sample fallback content due to API error.</p>",
-            image_url: "https://res.cloudinary.com/djunroohl/image/upload/v1739826909/fcpw9zqxs0wwxnmrp62n.svg",
+            title: "Lesto Project Website Launch",
+            content: "<p>The Lesto project website is now online check back soon for more content and news</p>",
+            image_url: "https://www.codelikethewind.org/content/images/size/w2000/2022/05/hello_world.png",
             created_at: new Date().toISOString()
           }
         ]);
@@ -71,7 +71,8 @@ function Home() {
     <div className="container mx-auto px-4 py-8">
       <div className="min-h-screen">
         <main className="max-w-4xl mx-auto">
-          <h1>Advancing lead fast reactor technology</h1>
+          <h1 class ="fade-in-left" 
+         >Advancing lead fast reactor technology</h1>
           
           <section style={{ borderBottomRightRadius: "1.0rem", marginTop: "10vh" }} className="bg-white shadow-md p-6">
             <div>
@@ -83,7 +84,7 @@ function Home() {
               <h2 id="blacktext" className="text-2xl font-bold text-gray-800 mb-6">Latest News</h2>
               {Array.isArray(news) && news.length > 0 ? (
                 news.map((article) => (
-                  <div key={article.id} className="news-article" style={{ marginLeft: "12vw" }}>
+                  <div key={article.id} className="news-article">
                     <img
                       src={article.image_url || "https://res.cloudinary.com/djunroohl/image/upload/v1739826909/fcpw9zqxs0wwxnmrp62n.svg"}
                       alt={article.title || "News image"}

@@ -427,6 +427,10 @@ body.dark h2 {
   padding: 0 !important;
 }
 
+.fade-in-left {
+  animation: fadeInLeft 1s ease-out forwards;
+}
+
 .logo {
   display: flex !important;
   height: 156px !important;
@@ -436,6 +440,21 @@ body.dark h2 {
   animation: fadeIn 1s ease-in-out forwards;
 }
 /* ------------------------- */
+
+/* fade in left */
+
+@keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* fade in */
 
 @keyframes fadeIn {
   0% {
