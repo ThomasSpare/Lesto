@@ -21,7 +21,7 @@ import {
   thumbsUpIcon,
 } from "@cds/core/icon";
 import "@webcomponents/custom-elements/custom-elements.min.js";
-import { ReactComponent as LestLogo } from "../Assets/images/LestoLogo.svg";
+// import { ReactComponent as LestLogo } from "../Assets/images/LestoLogo.svg";
 import "@clr/icons/clr-icons.min.css";
 import "@clr/icons/shapes/technology-shapes.js";
 import ModalAuth from "./modal_auth.js";
@@ -89,12 +89,11 @@ function NavBar() {
                 <ModalAuth isLoggedIn={isLoading} />
               <div className="branding" onClick={() => window.location.href = "/"}>
                 {showLogo && (
-                  <LestLogo
-                  className="logo"
-                  width={200}
-                  height={100}
-                  aria-label="Lesto Logo"
-                />
+                  <img
+                    className="logo"
+                    src={require("../Assets/images/logolesto4k.png")}
+                    alt="Logo"
+                  />
                 )}
               </div>
               <div className="settings">

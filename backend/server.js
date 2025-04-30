@@ -109,7 +109,7 @@ const getUserInfo = async (email) => {
 
 var options = {
   method: "POST",
-  url: "https://dev-h6b2f6mjco5pu6wz.us.auth0.com/oauth/token",
+  url: "https://lesto.eu.auth0.com/oauth/token",
   headers: { "content-type": "application/x-www-form-urlencoded" },
   data: new URLSearchParams({
     grant_type: "client_credentials",
@@ -653,5 +653,5 @@ app.get("/api/news", async (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Måste Server running on port ${port}`);
+  console.log(`LESTO Server running on port ${port}`);
 });

@@ -34,7 +34,8 @@
     flex-wrap: wrap;
     flex-direction: column;
     border-bottom-right-radius: 25px;
-    box-shadow: 16px 11px 10px 3px #00000036, 17px 17px 14px 15px #00000000, var(--tw-shadow);  
+    box-shadow: 16px 11px 10px 3px #00000036, 17px 17px 14px 15px #00000000, var(--tw-shadow);
+    background-color: whitesmoke;  
   }
   
   .text-section h2 {

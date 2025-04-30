@@ -20,11 +20,13 @@ const HamburgerMenu = () => {
     return (
         <div className="hamburger-menu">
             <Link to="/" onClick={closeMenu}>
-                <LestoLogo 
+                <img 
+                src={require("../Assets/images/logolesto4k.png")} 
                 width={200}
                 height={100}
                 aria-label="Lesto Logo"
-                className='maste-logo-hamburger' alt="Lesto Logo" />
+                className='maste-logo-hamburger' 
+                alt="Lesto Logo" />
             </Link>
             <button className="hamburger-icon" onClick={toggleMenu}>
                 <i className={`fas ${isOpen ? 'fa-times' : 'fa-bars'}`}></i>

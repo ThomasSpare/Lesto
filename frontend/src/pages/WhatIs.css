@@ -1,8 +1,4 @@
 
-h1{
-    font-size: x-large !important;
-    margin-left: 26vw;
-}
 
 .text-page {
     display: flex;
@@ -59,6 +55,7 @@ h1{
 
   .SubTitle{
     margin-top: 10vh !important;
+    margin-left: 5vw;
   }
   
   .content {
@@ -67,7 +64,11 @@ h1{
     height: 101vh;
     background-size: cover;
     overflow-x: hidden;
-    background: linear-gradient(142deg, rgb(230, 230, 230) 0%, rgba(243, 243, 243, 0.557) 30%, rgba(26, 21, 165, 0.334) 100%);
+    border-style: solid;
+    border-width: thick;
+    border-color: #3c76bb3b;
+    border-left: none;
+    border-right: none;
   }
 
   
@@ -92,16 +93,16 @@ h1{
 
   @media screen and (max-width: 768px) {
     .text-section {
-        display: flex;
-        margin-bottom: 20px;
-        text-align: justify;
-        line-height: normal;
-        margin-top: 91px;
-        flex-wrap: wrap;
-        flex-direction: column;
-        width: 80%;
-        margin-left: 10%;
-        font-size: xx-large;
+      display: flex;
+      margin-bottom: 20px;
+      text-align: justify;
+      line-height: normal;
+      margin-top: 20px;
+      flex-wrap: wrap;
+      flex-direction: column;
+      width: 80%;
+      margin-left: 0vw;
+      margin-right: 0vw;
       }
   
 

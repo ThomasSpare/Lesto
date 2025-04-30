@@ -7,18 +7,121 @@
 @import '~@cds/core/global.min.css';
 @import '~@cds/core/styles/theme.dark.min.css';
 @import '~@clr/ui/clr-ui.min.css';
-@import url('https://fonts.googleapis.com/css2?family=Clarity+City:wght@300;400;600&display=swap');
 
 /* Sass file syntax */
 @import '~modern-normalize/modern-normalize.css'; /* css reset */
-@import '~@cds/city/css/bundles/default.min.css'; /* load base font */
-@import url('https://fonts.googleapis.com/css2?family=Clarity+City:wght@300;400;600&display=swap'); /* clarity city font */
 
-@font-face {
-  font-family: 'Metropolis';
-  src: url('./Assets/Fonts/Webfonts/WOFF2/Metropolis-Medium.woff2') format('woff2'),
-       url('./Assets/Fonts/Webfonts/WOFF/Metropolis-Medium.woff') format('woff');
+
+/* Barlow fonts CSS styles */
+.barlow-thin {
+  font-family: "Barlow", sans-serif;
+  font-weight: 100;
+  font-style: normal;
 }
+
+.barlow-extralight {
+  font-family: "Barlow", sans-serif;
+  font-weight: 200;
+  font-style: normal;
+}
+
+.barlow-light {
+  font-family: "Barlow", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.barlow-regular {
+  font-family: "Barlow", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.barlow-medium {
+  font-family: "Barlow", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.barlow-semibold {
+  font-family: "Barlow", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.barlow-bold {
+  font-family: "Barlow", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.barlow-extrabold {
+  font-family: "Barlow", sans-serif;
+  font-weight: 800;
+  font-style: normal;
+}
+
+.barlow-black {
+  font-family: "Barlow", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.barlow-thin-italic {
+  font-family: "Barlow", sans-serif;
+  font-weight: 100;
+  font-style: italic;
+}
+
+.barlow-extralight-italic {
+  font-family: "Barlow", sans-serif;
+  font-weight: 200;
+  font-style: italic;
+}
+
+.barlow-light-italic {
+  font-family: "Barlow", sans-serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.barlow-regular-italic {
+  font-family: "Barlow", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.barlow-medium-italic {
+  font-family: "Barlow", sans-serif;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.barlow-semibold-italic {
+  font-family: "Barlow", sans-serif;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.barlow-bold-italic {
+  font-family: "Barlow", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.barlow-extrabold-italic {
+  font-family: "Barlow", sans-serif;
+  font-weight: 800;
+  font-style: italic;
+}
+
+.barlow-black-italic {
+  font-family: "Barlow", sans-serif;
+  font-weight: 900;
+  font-style: italic;
+}
+
+/* -------------- */
 
 .shadow-md{
   box-shadow: 16px 11px 10px 3px #00000036, 17px 17px 14px 15px #00000000, var(--tw-shadow);
@@ -33,16 +136,28 @@ html {
   display: flex;
 }
 
+h1,
 h2{
-  color: #464646 !important;
+  font-family: "Barlow", sans-serif !important;
+  font-weight: 400 !important;
+  font-style: normal !important; 
+  color: #464646;
+  font-size: xx-large !important;
 }
+
 
 li{
   color: #464646 !important;
 }
 
+body .text-section h1, h2, p {
+  color: rgb(42, 42, 42);
+}
+
 p{
-  color: #464646 !important;
+  font-family: "Barlow", sans-serif !important;
+  font-weight: 400;
+  font-style: normal;
 }
 
 #blacktext{
@@ -58,7 +173,9 @@ p{
 }
 
 footer{
-  font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-family: "Barlow", sans-serif;
+  font-weight: 400;
+  font-style: normal;
   min-height: 100vh !important;
 }
 
@@ -71,7 +188,7 @@ footer{
 
 .App {
   text-align: center;
-  font-family: "Metropolis", sans-serif;
+  font-family: "Barlow", sans-serif !important; 
 }
 
 .nav{
@@ -205,24 +322,28 @@ body.dark p {color: lightgray;}
 a.dark {color: lightgray;}
 .footer-logo.dark{background-color: currentColor;}
 /* Dark mode for The Content on all pages */
-body.dark .content{background-blend-mode: exclusion;}
-body.dark .text-section{color: lightgray;}
-body.dark .text-section h2{color: lightgray;}
+body.dark .content{background-blend-mode: exclusion; background-color: black;}
 body.dark .quote{background-color: #012b7d; color: lightgray;;}
-body.dark h1, p {color: lightgray} body.border{color:  rgb(45, 79, 90)} a{color: lightgray} input {color: #ccc !important} select {color: rgb(75, 123, 107)  !important;} textarea {color:lightgray !important;}
+body.border{color:  rgb(45, 79, 90)} a{color: lightgray} input {color: #ccc !important} select {color: rgb(75, 123, 107)  !important;} textarea {color:lightgray !important;}
 /* Dark mode for Partners page */
 body.dark #chalmers{ background-color: #012b7d; border-radius: 25px;}
 body.dark #lund{ background-color: #012b7d; border-radius: 25px;}
 body.dark #kth{ background-color: #012b7d; border-radius: 25px;}
 body.dark #uppsala{ background-color: #012b7d; border-radius: 25px;}
 /* Dark mode partners page */
-body.dark .partner-box {background-color: #012b7d;; color: lightgray;;}
+body.dark .partner-box {background-color: #1a2f48;; color: lightgray;;}
 /* Dark mode Workstructure page */
 body.dark .ws-header {color: lightgray; background-color: #012b7d;;}
 body.dark .ws-text-box {color: lightgray;}
 body.dark .ws-img-container {color: lightgray;}
 body.dark .svg-text { background-color: #00203b;}
 body.dark .WP-img {opacity: 0.8;}
+body.dark #root > div.text-page > main > section p,h1,h2 {
+  color: lightgray;
+}
+body.dark h2 {
+  color: lightgray;
+}
 
 
 
@@ -308,9 +429,8 @@ body.dark .WP-img {opacity: 0.8;}
 
 .logo {
   display: flex !important;
-  height: 140px !important;
+  height: 156px !important;
   pointer-events: none;
-  border-radius: 10px;
   margin-top: 0%;
   opacity: 0;
   animation: fadeIn 1s ease-in-out forwards;

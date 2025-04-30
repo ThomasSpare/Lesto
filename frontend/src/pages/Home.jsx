@@ -30,8 +30,8 @@ function Home() {
             },
             {
               id: 2,
-              title: "MÅSTE Project Receives Additional Funding",
-              content: "<p>The MÅSTE initiative has been awarded a substantial grant to expand research into nuclear safety protocols for next-generation reactors.</p>",
+              title: "LESTO Receives Additional Funding",
+              content: "<p>The LESTO initiative has been awarded a substantial grant to expand research into nuclear safety protocols for next-generation reactors.</p>",
               image_url: "https://via.placeholder.com/300",
               created_at: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString() // 7 days ago
             },
@@ -71,19 +71,12 @@ function Home() {
     <div className="container mx-auto px-4 py-8">
       <div className="min-h-screen">
         <main className="max-w-4xl mx-auto">
+          <h1>Advancing lead fast reactor technology</h1>
+          
           <section style={{ borderBottomRightRadius: "1.0rem", marginTop: "10vh" }} className="bg-white shadow-md p-6">
             <div>
               <p className="text-left text-gray-700 leading-relaxed space-y-4" id="blacktext">
-              WP 5 objective is to support the exchange of knowledge and practical experience
-among the community and future researchers as well as dissemination and
-exploitation of the results.
-
-It is primary addressed to MSc and PhD students, as main target group, but also
-researchers and other members of the community.
-
-As a keeper and provider of knowledge, WP5 will also host a "LFR simulation
-tools initiative", where on an open platform the partners will share simulation tools
-for use and further development.
+              Lead Fast Reactors (LFRs) are a crucial technology for advancing both hydrogen energy and nuclear power solutions, offering a promising and ambitious approach. Investors are already drawn to the advantages of competitive small- to medium-sized LFRs and their potential impact on the global market. The EU-funded LESTO project aims to further develop this technology, advancing it along its established roadmap and demonstrating its safety, efficiency, and other key features. To achieve this, the project will leverage the most relevant facilities in Europe and the UK to thoroughly validate, assess, and assist in the continued development of LFR technology.
               </p>
             </div>
             <section className="mt-10">

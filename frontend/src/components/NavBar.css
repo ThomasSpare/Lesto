@@ -45,7 +45,7 @@ a:link:not(.btn,.nav-link,.dropdown-item,.alert-action,.badge):hover {
 
 
 .nav{
-  background: linear-gradient(142deg, rgb(230, 230, 230) 0%, rgba(243, 243, 243, 0.557) 30%, rgba(26, 21, 165, 0.334) 100%);
+  background-color: #1a2f48;
   box-shadow: none !important;
 }
 
@@ -54,7 +54,11 @@ a:link:not(.btn,.nav-link,.dropdown-item,.alert-action,.badge):hover {
 }
 
 #root > header > div > nav{
-background-color: #153657;
+  background-color: #153657;
+  font-family: "Barlow", sans-serif;
+  font-weight: 600;
+  font-size: 1.2rem;
+  font-style: italic;
 }
 
 /* Custom styles for the hamburger menu */

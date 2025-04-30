@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: maste-science-frontend
+    name: lesto-frontend
     env: static
     staticPublishPath: frontend/build
     routes:
