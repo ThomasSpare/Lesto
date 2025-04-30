@@ -23,25 +23,11 @@ function Home() {
           setNews([
             {
               id: 1,
-              title: "Lesto Project Website Launched",
-              content: "<p>Scientists at Chalmers University of Technology have made significant progress in Gen IV reactor cooling systems, potentially increasing efficiency by 15%.</p>",
-              image_url: "https://images.app.goo.gl/aYkuW59rTD3cMZK16",
+              title: "Lesto Project Website Launch",
+              content: "<p>The Lesto project website is now online check back soon for more content and news</p>",
+              image_url: "https://www.codelikethewind.org/content/images/size/w2000/2022/05/hello_world.png",
               created_at: new Date().toISOString()
             },
-            {
-              id: 2,
-              title: "LESTO Receives Additional Funding",
-              content: "<p>The LESTO initiative has been awarded a substantial grant to expand research into nuclear safety protocols for next-generation reactors.</p>",
-              image_url: "https://via.placeholder.com/300",
-              created_at: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString() // 7 days ago
-            },
-            {
-              id: 3,
-              title: "International Collaboration Expands",
-              content: "<p>Swedish researchers join forces with international partners to accelerate development of sustainable nuclear energy solutions.</p>",
-              image_url: "https://res.cloudinary.com/djunroohl/image/upload/v1739826909/fcpw9zqxs0wwxnmrp62n.svg",
-              created_at: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString() // 14 days ago
-            }
           ]);
           return;
         }
