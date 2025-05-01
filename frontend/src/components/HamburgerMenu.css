@@ -1,86 +1,120 @@
 .hamburger-menu {
-    position: relative;
-    z-index: 999;
-    background-color: #b61217;
-  }
+  position: relative;
+  z-index: 999;
+  background-color: #b61217;
+}
 
-  .maste-logo-hamburger{
-    display: flex;
-    margin-right: 10vw;
-    height: 185px !important;
-  }
-  
-  .hamburger-icon {
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-  }
+.maste-logo-hamburger {
+  display: flex;
+  margin-right: 10vw;
+  height: 185px !important;
+}
 
-  .fa-solid, .fas {
-    font-size: large;
+.hamburger-icon {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.fa-solid,
+.fas {
+  font-size: large;
+  font-weight: 900;
+}
+
+.menu ul li {
+  position: relative;
+  overflow: hidden;
+}
+
+.menu ul li a {
+  position: relative;
+  display: block;
+}
+
+.menu ul li a::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent);
+  transform: skewX(-45deg);
+  transition: 0.5s;
+  pointer-events: none;
+}
+
+.menu ul li a:active::before {
+  left: 100%;
+}
+
+.menu {
+  display: none;
+  position: absolute;
+  top: 132px;
+  background-color: #b61217;
+  box-shadow: -17px 19px 15px 11px rgba(0, 0, 0, 0.1);
+}
+
+.menu.open {
+  display: block;
+}
+
+.menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu ul li {
+  padding: 35px;
+  border-bottom: 1px solid #ddd;
+}
+
+.menu ul li a {
+  text-decoration: none;
+  color: #eaeaea !important;
+  display: block;
+  font-size: x-large !important;
+  width: 270px;
+}
+
+.menu ul li a:hover {
+  background-color: #f0f0f0;
+}
+
+@media screen and (max-width: 768px) {
+
+  .fa-solid,
+  .fas {
     font-weight: 900;
-}
-  
-  .menu {
-    display: none;
-    position: absolute;
-    top: 132px;
-    background-color: #b61217;
-    box-shadow: -17px 19px 15px 11px rgba(0, 0, 0, 0.1);
-  }
-  
-  .menu.open {
-    display: block;
-  }
-  
-  .menu ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .menu ul li {
-    padding: 35px;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .menu ul li a {
-    text-decoration: none;
-    color: #eaeaea !important;
-    display: block;
-    font-size: x-large !important;
-    width: 270px;
-}
-  
-  .menu ul li a:hover {
-    background-color: #f0f0f0;
+    font-size: xxx-large;
   }
 
-@media screen and (max-width: 768px){     
-          .fa-solid, .fas {
-            font-weight: 900;
-            font-size: xxx-large;
-        }
-        .maste-logo-hamburger {
-          display: flex;
-          margin-right: 46vw;
-          margin-top: 0px;
-          max-width: -moz-fit-content;
-          max-width: -webkit-fit-content;
-          max-width: fit-content;  
-        }
+  .maste-logo-hamburger {
+    display: flex;
+    margin-right: 46vw;
+    margin-top: 0px;
+    max-width: -moz-fit-content;
+    max-width: -webkit-fit-content;
+    max-width: fit-content;
+  }
 }
 
-  @media screen and (max-width: 425px){
-    .private-host {
-      font-size: xx-large !important;
-    }
+@media screen and (max-width: 425px) {
+  .private-host {
+    font-size: xx-large !important;
+  }
 
-        }
-    
+}
+
 @media screen and (max-width: 375px) {
-        .hamburger-menu {
-            width: 100%;
-        }
-    }
+  .hamburger-menu {
+    width: 100%;
+  }
+}
