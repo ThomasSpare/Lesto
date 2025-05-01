@@ -495,6 +495,22 @@ body.dark h2 {
 }
 }
 
+@media screen and (max-width: 2000px){
+  .text-page{
+    margin-top: 10vh !important;
+  }
+  .ws-text-page{
+    margin-top: 10vh !important;
+  }
+  .mx-auto.px-4.py-8{
+    margin-top: 10vh;
+  }
+  .search-main-div{
+    margin-top: 10vh;
+  }
+}
+
+
 
 @media screen and (max-width: 1440px){
 

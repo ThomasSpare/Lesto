@@ -57,6 +57,9 @@ node_modules/
 
 # dotenv environment variables file
 .env
+.env.production
+frontend/.env.production
+backend/.env.production
 
 # Dependency directories
 backend/private.key
