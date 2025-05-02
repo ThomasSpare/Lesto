@@ -14,6 +14,7 @@
     font-size: x-large !important;
     margin-bottom: 2vh;
 }
+
 .contacts-text-section a {
     font-size: x-large;
     margin-bottom: 5vh;
@@ -22,4 +23,11 @@
 .mailto {
     font-size: larger !important;
     color: blue;
+}
+
+@media screen and (max-width: 768px) {
+    #root>div.text-page>main>div>div>img {
+        height: 20px !important;
+    }
+
 }
