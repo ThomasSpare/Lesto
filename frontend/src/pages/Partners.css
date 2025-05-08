@@ -39,8 +39,7 @@ img{
 
 .partners{
     display: grid;
-    width: 45vw;
-    justify-content: center;
+    width: 85vw;
     justify-items: center;
 }
 .partners-links{

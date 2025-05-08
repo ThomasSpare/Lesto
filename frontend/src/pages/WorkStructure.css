@@ -39,11 +39,12 @@ svg{
 }
 
 .WP-img {
-  position: relative;
+  position: absolute;
   margin-top: 10px;
   margin-bottom: 0px;
   border: none;
   height: 40vh;
+  width: 75vw !important;
 }
 
 .ws-text-box {
@@ -127,7 +128,6 @@ svg{
 
 @media screen and (max-width: 1440px){
   .ws-img-container {
-    position: relative;
     width: 100%;
     max-width: 600px;
     margin: 0 auto;
@@ -148,6 +148,7 @@ svg{
 @media screen and (max-width: 768px) {
   .ws-content {
     background-image: none !important;
+    width: 100vw;
   }
   #root > div > main > section > div > div.ws-text-box > p {
     color: black;
@@ -159,7 +160,7 @@ svg{
     width: 55vw;
 }
   svg {
-    width: 100% !important;
+    width: 115% !important;
     height: 125% !important;
     z-index: 99;
   }
@@ -167,6 +168,6 @@ svg{
 
 @media screen and (max-width: 425px){
   .ws-text-box p {
-    width: 140vw;
+    width: 94vw;
 }
 }

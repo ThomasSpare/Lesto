@@ -88,30 +88,31 @@ const Footer = () => {
                 <span style={{ marginLeft: "1rem" }}>031-772 1000</span>
               </p> */}
             </MDBCol>
-            <div
-              style={{
-                backgroundColor: "#1a2f48",
-                width: "-webkit-fill-available !important",
-              }}
-              className="footer-bottom text-center p-4 text-white"
-            >
-              © 2025 Copyright:
-              <a
-                style={{
-                  margin: "auto",
-                  display: "flex",
-                  justifyContent: "center",
-                  backgroundColor: "#1a2f48",
-                  width: "-webkit-fill-available !important",
-                }}
-                className="text-reset fw-bold"
-                href="/"
-              >
-                LESTO
-              </a>
-            </div>
           </MDBRow>
         </MDBContainer>
+        <div
+          style={{
+            flexDirection: "column",
+            backgroundColor: "#1a2f48",
+            width: "-webkit-fill-available !important",
+          }}
+          className="footer-bottom text-center p-4 text-white"
+        >
+          © 2025 Copyright:
+          <a
+            style={{
+              margin: "auto",
+              display: "flex",
+              justifyContent: "center",
+              backgroundColor: "#1a2f48",
+              width: "-webkit-fill-available !important",
+            }}
+            className="text-reset fw-bold"
+            href="/"
+          >
+            LESTO
+          </a>
+        </div>
       </div>
     </MDBFooter>
   );
