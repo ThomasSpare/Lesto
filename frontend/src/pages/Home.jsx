@@ -13,6 +13,17 @@ import "./Home.css";
 
 function Home() {
   const [news, setNews] = useState([]);
+  const [activeIndex, setActiveIndex] = useState(0);
+  
+  useEffect(() => {
+    if (news.length > 0) {
+      const timer = setInterval(() => {
+        setActiveIndex((current) => (current + 1) % news.length);
+      }, 5000); // 5 seconds delay
+  
+      return () => clearInterval(timer);
+    }
+  }, [news.length]);
 
   useEffect(() => {
     const fetchNews = async () => {
@@ -67,39 +78,74 @@ function Home() {
               </p>
             </div>
             <section className="mt-10">
-              <h2 id="blacktext" className="text-2xl font-bold text-gray-800 mb-6">Latest News</h2>
-              {Array.isArray(news) && news.length > 0 ? (
-                news.map((article) => (
-                  <div key={article.id} className="news-article">
-                    <img
-                      src={article.image_url || "https://res.cloudinary.com/djunroohl/image/upload/v1739826909/fcpw9zqxs0wwxnmrp62n.svg"}
-                      alt={article.title || "News image"}
-                      className="news-image"
-                      onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.src = "https://res.cloudinary.com/djunroohl/image/upload/v1739826909/fcpw9zqxs0wwxnmrp62n.svg";
-                      }}
-                    />
-                    <div className="news-content">
-                      <h3>{article.title}</h3>
-                      <div
-                        dangerouslySetInnerHTML={{
-                          __html: article.content?.length > 200
-                            ? `${article.content.substring(0, 200)}...`
-                            : article.content || "<p>Article content unavailable</p>",
-                        }}
-                      />
-                      <Link to={`/news/${article.id}`} className="read-more-link"> read more</Link>
-                      <p className="news-date">
-                        {new Date(article.created_at).toLocaleDateString()}
-                      </p>
-                    </div>
-                  </div>
-                ))
-              ) : (
-                <p className="text-center text-gray-500 italic">No news available</p>
-              )}
-            </section>
+  <h2 id="blacktext" className="text-2xl font-bold text-gray-800 mb-6">
+    Latest News
+  </h2>
+  {Array.isArray(news) && news.length > 0 ? (
+    <div className="relative w-full h-[600px] overflow-hidden rounded-lg">
+      {/* Carousel container */}
+      <div className="relative h-[400px] mb-4">
+        {news.map((article, index) => (
+          <div
+            key={article.id}
+            className={`absolute w-full h-full transition-all duration-700 ease-in-out transform ${
+              index === activeIndex ? "opacity-100 translate-x-0" : "opacity-0 translate-x-full"
+            }`}
+          >
+            <img
+              src={article.image_url || "https://res.cloudinary.com/djunroohl/image/upload/v1739826909/fcpw9zqxs0wwxnmrp62n.svg"}
+              alt={article.title || "News image"}
+              className="w-full h-full object-cover"
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = "https://res.cloudinary.com/djunroohl/image/upload/v1739826909/fcpw9zqxs0wwxnmrp62n.svg";
+              }}
+            />
+          </div>
+        ))}
+      </div>
+
+      {/* Content box below image */}
+      <div className="bg-white p-6 rounded-lg shadow-lg">
+        <h3 className="text-xl font-bold mb-2">{news[activeIndex].title}</h3>
+        <div
+          className="prose max-w-none mb-4"
+          dangerouslySetInnerHTML={{
+            __html:
+              news[activeIndex].content?.length > 200
+                ? `${news[activeIndex].content.substring(0, 200)}...`
+                : news[activeIndex].content || "<p>Article content unavailable</p>",
+          }}
+        />
+        <div className="flex justify-between items-center">
+          <Link
+            to={`/news/${news[activeIndex].id}`}
+            className="text-blue-600 hover:text-blue-800 transition-colors duration-200"
+          >
+            read more
+          </Link>
+          <p className="text-gray-500 text-sm">
+            {new Date(news[activeIndex].created_at).toLocaleDateString()}
+          </p>
+        </div>
+      </div>
+
+      {/* Navigation dots */}
+      <div className="absolute bottom-24 left-0 right-0 flex justify-center space-x-2">
+        {news.map((_, index) => (
+          <button
+            key={index}
+            className={`w-3 h-3 rounded-full transition-all duration-200 
+              ${index === activeIndex ? "bg-blue-600" : "bg-gray-300"}`}
+            onClick={() => setActiveIndex(index)}
+          />
+        ))}
+      </div>
+    </div>
+  ) : (
+    <p className="text-center text-gray-500 italic">No news available</p>
+  )}
+</section>
           </section>
         </main>
       </div>

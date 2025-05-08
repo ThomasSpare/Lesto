@@ -22,3 +22,11 @@
 .mailto {
     font-size: larger !important;
 }
+@media screen and (max-width: 768px){
+
+    .flag{
+        width: 20px !important;
+        height: 20px !important;
+        margin-right: 10px !important;
+    }
+}

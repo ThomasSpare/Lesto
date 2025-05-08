@@ -129,7 +129,6 @@
 
 #root{
   background: linear-gradient(142deg, rgb(230, 230, 230) 0%, rgba(243, 243, 243, 0.557) 30%, rgba(26, 21, 165, 0.334) 100%);
-  height: 1800px !important;
 }
 
 html {
@@ -326,10 +325,10 @@ body.dark .content{background-blend-mode: exclusion; background-color: black;}
 body.dark .quote{background-color: #012b7d; color: lightgray;;}
 body.border{color:  rgb(45, 79, 90)} a{color: lightgray} input {color: #ccc !important} select {color: rgb(75, 123, 107)  !important;} textarea {color:lightgray !important;}
 /* Dark mode for Partners page */
-body.dark #chalmers{ background-color: #012b7d; border-radius: 25px;}
-body.dark #lund{ background-color: #012b7d; border-radius: 25px;}
-body.dark #kth{ background-color: #012b7d; border-radius: 25px;}
-body.dark #uppsala{ background-color: #012b7d; border-radius: 25px;}
+body.dark #chalmers{  background-color: aliceblue; border-radius: 5px; padding: 15px;}
+body.dark #lund{background-color: aliceblue; border-radius: 5px; padding: 15px;}
+body.dark #kth{ background-color: aliceblue; border-radius: 5px; padding: 15px;}
+body.dark #uppsala{ background-color: aliceblue; border-radius: 5px; padding: 15px;}
 /* Dark mode partners page */
 body.dark .partner-box {background-color: #1a2f48;; color: lightgray;;}
 /* Dark mode Workstructure page */
@@ -613,10 +612,10 @@ margin-top: 10vh !important;
 
   #Footer {
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    flex-direction: column;
-    align-items: center;
+    align-items: flex-end;
 }
 
   .hamburger-menu {
@@ -753,10 +752,6 @@ li:hover {
     padding-left: 0rem !important;
   }
 
-  .logo {
-    display: none !important;
-
-  }
   .text {
     padding-left: 10vw;
     padding-right: 10vw;

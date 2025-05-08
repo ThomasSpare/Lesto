@@ -59,38 +59,38 @@ img{
     font-weight: 500;
     font-size: larger;
     color: #333;
-  }
+}
 
-    .Partners_list {
-        text-align: justify;
-        align-self: center;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center; 
-        font-family: 'Metropolis', sans-serif;
-        font-weight: 500;
-        /* Override styles from lists.css */
-        font-size: initial;
-        font-weight: initial;
-    }
+.Partners_list {
+    text-align: justify;
+    align-self: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; 
+    font-family: 'Metropolis', sans-serif;
+    font-weight: 500;
+    /* Override styles from lists.css */
+    font-size: initial;
+    font-weight: initial;
+}
 
-    li{
-        width: 40vw !important;
-        font-size: medium;
-        font-weight: 500;
-        line-height-step: 1.5;
-        border-style: none;
-     }
-    
+li{
+    width: 40vw !important;
+    font-size: medium;
+    font-weight: 500;
+    line-height-step: 1.5;
+    border-style: none;
+}
 
-    .header {
-        background-color: #2fb0ff;
-        color: white;
-        text-align: center;
-    }
 
-  
-  .Partner_content {
+.header {
+    background-color: #2fb0ff;
+    color: white;
+    text-align: center;
+}
+
+
+.Partner_content {
     flex: 1 1;
     padding: 20px;
     background-color: #f9f9f9;
@@ -99,13 +99,13 @@ img{
     background-size: cover;
     overflow-x: hidden;
     
-  }
-  
-  .Partner_text-section {
-    margin-bottom: 20px;
-  }
+}
 
-  #Footer {
+.Partner_text-section {
+    margin-bottom: 20px;
+}
+
+#Footer {
     margin-top: 5vh !important;
     width: 100vw;
 }
@@ -114,6 +114,11 @@ img{
     img {
         max-width: 100% !important;
     }
-  }
+    .flag{
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+    }
+}
 
 

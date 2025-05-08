@@ -17,12 +17,21 @@ const Dashboard = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [image, setImage] = useState(null);
+  // New state for preview URL
+  const [previewUrl, setPreviewUrl] = useState("");
   const [posts, setPosts] = useState([]);
   const [editPostId, setEditPostId] = useState(null);
   const [isAuthenticatedState, setIsAuthenticatedState] = useState(false);
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [author, setAuthor] = useState("");
   const navigate = useNavigate();
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 5;
+  const paginatedPosts = useMemo(() => {
+    const startIndex = (currentPage - 1) * postsPerPage;
+    const endIndex = startIndex + postsPerPage;
+    return posts.slice(startIndex, endIndex);
+  }, [posts, currentPage]);
 
   const allowedEmails = useMemo(
     () => ({
@@ -65,9 +74,7 @@ const Dashboard = () => {
   const fetchLastThreePosts = async () => {
     try {
       const response = await axios.get(
-        `${
-          process.env.process.env.REACT_APP_API_MOCK === "true"
-        }/api/news?limit=3`
+        `${process.env.REACT_APP_API_BASE_URL}/api/news`
       );
       setPosts(response.data);
     } catch (error) {
@@ -90,7 +97,7 @@ const Dashboard = () => {
 
     try {
       await axios.post(
-        `${process.env.process.env.REACT_APP_API_MOCK === "true"}/api/news`,
+        `${process.env.REACT_APP_API_BASE_URL}/api/news`,
         formData,
         {
           headers: {
@@ -113,9 +120,7 @@ const Dashboard = () => {
     try {
       const token = await getAccessTokenSilently();
       const response = await axios.delete(
-        `${
-          process.env.process.env.REACT_APP_API_MOCK === "true"
-        }/api/news/${postId}`,
+        `${process.env.REACT_APP_API_BASE_URL}/api/news/${postId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -155,9 +160,7 @@ const Dashboard = () => {
     try {
       const token = await getAccessTokenSilently();
       await axios.put(
-        `${
-          process.env.process.env.REACT_APP_API_MOCK === "true"
-        }/api/news/${editPostId}`,
+        `${process.env.REACT_APP_API_BASE_URL}/api/news/${editPostId}`,
         formData,
         {
           headers: {
@@ -181,17 +184,27 @@ const Dashboard = () => {
     return <div>Unauthorized access</div>;
   }
 
+  const handleNextPage = () => {
+    if (currentPage * postsPerPage < posts.length) {
+      setCurrentPage((prevPage) => prevPage + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage((prevPage) => prevPage - 1);
+    }
+  };
+
   return (
-    <div className="Settings">
-      <h1>NEWS</h1>
+    <div className={`Settings ${previewUrl ? "with-preview" : ""}`}>
       <div className="status">
         <p>Welcome, {user ? user.name : "Guest"}</p>
-        <p>You have the role: Admin</p>
+        <p>You have admin access and can post news for LESTO</p>
       </div>
       <div>
-        <p>You have admin access and can post news</p>
         <div className="news-form">
-          <h2>{editPostId ? "Edit News" : "Write some News about Måste !"}</h2>
+          <h2>{editPostId ? "Edit News" : "News Form"}</h2>
           <form onSubmit={editPostId ? handleUpdatePost : handleNewsSubmit}>
             <div>
               <label style={{ padding: "20px", color: "black" }}>
@@ -243,30 +256,87 @@ const Dashboard = () => {
               />
             </div>
             <div>
-              <label>News Image</label>
+              <label>News Image or Video</label>
               <input
-                style={{ color: "#000000cf, !important" }}
+                style={{ padding: "20px", borderRadius: "20px" }}
                 type="file"
-                onChange={(e) => setImage(e.target.files[0])}
+                onChange={(e) => {
+                  const file = e.target.files[0];
+                  setImage(file);
+                  setPreviewUrl(URL.createObjectURL(file));
+                }}
               />
             </div>
-            <button type="submit">
+            {previewUrl &&
+              image &&
+              (image.type.startsWith("video/") ? (
+                <video src={previewUrl} controls style={{ maxWidth: "100%" }} />
+              ) : (
+                <img
+                  src={previewUrl}
+                  alt="Preview"
+                  style={{ maxHeight: "40%" }}
+                />
+              ))}
+            <button
+              type="submit"
+              style={{
+                marginTop: "20px",
+                padding: "10px",
+                backgroundColor: "deepskyblue",
+                color: "blue",
+                borderRadius: "5px",
+              }}
+            >
               {editPostId ? "Update News Post" : "Add News Post"}
             </button>
           </form>
         </div>
         <div className="news-list">
-          <h2>Last 3 News Posts</h2>
-          {posts.map((post) => (
+          <h2 style={{ marginBottom: "20px" }}>News Posts</h2>
+          {paginatedPosts.map((post) => (
             <div key={post._id} className="news-item">
               <h3>{post.title}</h3>
-              <div dangerouslySetInnerHTML={{ __html: post.content }} />
+              <div
+                className="news-content"
+                dangerouslySetInnerHTML={{ __html: post.content }}
+              />
               {post.image && <img src={post.image} alt={post.title} />}
-              <p>Author: {post.author}</p>
-              <button onClick={() => handleEditPost(post)}>Edit</button>
-              <button onClick={() => handleDeletePost(post.id)}>Delete</button>
+              <p>
+                Publishing Date:{" "}
+                {new Date(post.upload_date).toLocaleDateString()}
+              </p>
+              <p style={{ marginBottom: "20px" }}>Author: {post.author}</p>
+              <button
+                onClick={() => handleEditPost(post)}
+                style={{ color: "blue", marginRight: "30px" }}
+              >
+                Edit
+              </button>
+              <button
+                onClick={() => handleDeletePost(post.id)}
+                style={{ color: "blue" }}
+              >
+                Delete
+              </button>
             </div>
           ))}
+          <div className="pagination-controls">
+            <button
+              onClick={handlePreviousPage}
+              disabled={currentPage === 1}
+              style={{ marginRight: "30px", color: "deepskyblue" }}
+            >
+              Previous
+            </button>
+            <button
+              onClick={handleNextPage}
+              disabled={currentPage * postsPerPage >= posts.length}
+              style={{ color: "deepskyblue" }}
+            >
+              Next
+            </button>
+          </div>
         </div>
       </div>
     </div>

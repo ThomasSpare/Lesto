@@ -16,30 +16,28 @@ const Contacts = () => {
         <main className="content">
             <div className="contacts-text-section">
             <h2>Coordinator</h2>
+            <p>AGENZIA NAZIONALE PER LE NUOVE TECNOLOGIE, L'ENERGIA E LO SVILUPPO ECONOMICO SOSTENIBILE</p>
+            <h2>Address</h2>
             <p>
-                Prof. Christian Ekberg
-                <br />
-                Professor, Stena’s chair in Industrial Materials Recycling
-                <br />
-                Professor Nuclear Chemistry
-                <br />
-                Head of Energy and Materials division
-                <br />
-                Department of Chemistry and Chemical Engineering
-                <br />
-                Chalmers Tekniska Högskola Aktiebolag
-                <br />
-                SE-412 96 Göteborg, Sweden
-                <br />
-                Email:
-                <a className="mailto" href="mailto:che@chalmers.se">che@chalmers.se
-                    </a>
-                Tel: +46-31-7722801
+            LUNGOTEVERE GRANDE AMMIRAGLIO THAON DI REVEL <br></br>66
+            00196 Roma
             </p>
+            <div className="flag-icon">
+              <img 
+                src="https://upload.wikimedia.org/wikipedia/en/0/03/Flag_of_Italy.svg" 
+                alt="Italian Flag" 
+                style={{ width: "40px", height: "auto" }}
+                className="flag"
+              />
+            </div>
+                <br />
+                <h2>Contact</h2>
+                <p>Simone Gianfelici</p>
+                <a className="mailto" href="mailto:simone.gianfelici@enea.it">simone.gianfelici@enea.it</a>
+            
             </div>
       </main>
     </div>
-    
   );
 };
 

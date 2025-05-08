@@ -3,7 +3,21 @@
     background-size: cover;
     font-family: "Metropolis", sans-serif;
     font-size: medium;
-    padding: "20px"
+    padding: 20px;
+    margin-top: 12vh;
+    margin-bottom: 30vh;
+}
+
+.Settings.with-preview {
+  margin-bottom: 60vh;
+}
+
+.quill {
+  font-family: 'Barlow', sans-serif;
+}
+
+.Settings h2{
+    line-height: normal;
 }
 
 .Settings svg{
@@ -46,26 +60,30 @@ h3{
 }
 
 .status{
-    opacity: 1.7;
-    width: 320px;
-    padding: 3px;
-    border-radius: 15px;
-    background-color: #adbd8e;
-    padding-bottom: 20px;
+  width: 320px;
+  font-family: "Barlow", sans-serif;
+  font-weight: 500;
+  font-size: 0.75rem;
+  padding: 20px;
+  background-color: #48bffa;
+  padding-bottom: 20px;
+  box-shadow: 16px 11px 10px 3px #00000036, 17px 17px 14px 15px #00000000, var(--tw-shadow);
+  border-bottom-right-radius: 15px;
+  margin: 30px;
+  text-align: left;
 }
 
 
 
 .news-form {
-  padding: 20px;
-  background-color: #3a87d5;
-  opacity: 0.7;
-  color: black;
-  font-family: 'Metropolis';
-  font-weight: 700;
-  border: black;
-  border-style: ridge;
-  width: 50vw;
+    padding: 30px;
+    background-color: #b61217;
+    color: black;
+    font-family: 'Barlow', sans-serif;
+    font-weight: 500;
+    border-bottom-right-radius: 40px;
+    width: 50vw;
+    box-shadow: 16px 11px 10px 3px #00000036, 17px 17px 14px 15px #00000000, var(--tw-shadow);
 }
 
 .news-form p{
@@ -91,9 +109,12 @@ h3{
 
 .news-item{
   margin-bottom: 3vh;
-  background-color: #75abe1;
-  padding: 20px;
-  text-align: left;
+    background-color: whitesmoke;
+    padding: 20px;
+    text-align: left;
+    border-radius: 10px;
+    border-width: 6px;
+    border-color: rgb(0 191 255);
 }
 
 .news-list{
@@ -102,9 +123,13 @@ h3{
 }
 
 .news-content {
-  flex: 1;
   margin-top: 0.5em;
   padding: 20px;
+  text-align: justify;
+}
+
+.news-content li {
+  max-width: fit-content;
 }
 
 .news-date {
@@ -179,7 +204,7 @@ textarea {
 }
 .status {
   width: 140vw;
-  padding: 3px;
-  border-radius: 15px;
+  padding: 21px;
+  border-radius: 6px;
 }
 }

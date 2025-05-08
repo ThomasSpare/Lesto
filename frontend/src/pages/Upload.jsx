@@ -26,7 +26,7 @@ const Upload = () => {
   const { getAccessTokenSilently, isAuthenticated, loginWithRedirect, user } = useAuth0();
 
   const api = axios.create({
-    baseURL: process.env.process.env.REACT_APP_API_MOCK === 'true',
+    baseURL: process.env.process.env.REACT_APP_API_BASE_URL,
   });
 
   useEffect(() => {
@@ -94,7 +94,7 @@ const Upload = () => {
   
         if (response.status === 200) {
           alert('Files uploaded successfully');
-          window.location.href = `${process.env.REACT_APP_BASE_URL}/search`;
+          window.location.href = `${process.env.REACT_APP_API_BASE_URL}/search`;
       }
     } catch (error) {
       console.error('Error uploading files:', error);

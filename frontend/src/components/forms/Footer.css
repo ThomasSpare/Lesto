@@ -1,33 +1,47 @@
-#root > footer > section.d-flex.justify-content-center.justify-content-lg-between.p-4.border-bottom{
-    
-    justify-content: center !important;
+#Footer {
+    margin-top: 2rem !important; /* Changed from 100vh */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 200px !important;
+    min-height: 524px !important;
+}
+
+.footer-logo {
+    max-height: 200px !important;
+    width: auto !important;
+    object-fit: contain;
+}
+
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    height: 60px;
+}
+
+.Footer {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    height: -webkit-fill-available !important;
+}
+
+/* Remove or update these conflicting styles */
+.d-flex {
+    display: flex !important;
 }
 
 #root {
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    height: auto;
-  }
-
-html, body {
-    height: 100%;
-    margin: 0;
-  }
-
-#Footer{
-    margin-top: 100vh !important;
 }
 
-.footer-logo{
-  width: auto !important;
-  height: 200px !important;
-}
-
-.d-flex {
-    display: block !important;
-}
-
-
-#root > footer > section:nth-child(1) > div > div > div{
-    text-align: left;
+/* Ensure content pushes footer down */
+main {
+    flex: 1 0 auto;
 }

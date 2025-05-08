@@ -59,7 +59,7 @@
     "test": "react-app-rewired test",
     "eject": "react-scripts eject",
     "serve": "serve -s build",
-    "render": "npm install --legacy-peer-deps && npm run build && serve -s build"  
+    "render": "npm install --legacy-peer-deps && npm run build && serve -s build"
   },
   "eslintConfig": {
     "extends": [
@@ -96,7 +96,7 @@
     "@eslint/object-schema": "^2.0.3",
     "@jridgewell/sourcemap-codec": "^1.4.8",
     "@rollup/plugin-terser": "^0.4.4",
-    "autoprefixer": "^10.4.20",
+    "autoprefixer": "^10.4.21",
     "glob": "^9.0.0",
     "postcss": "^8.5.3",
     "rimraf": "^4.0.0",
@@ -109,4 +109,3 @@
     }
   }
 }
-

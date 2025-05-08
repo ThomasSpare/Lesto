@@ -57,6 +57,8 @@ node_modules/
 
 # dotenv environment variables file
 .env
+frontend/.env
+backend/.env
 
 # Dependency directories
 backend/private.key
@@ -67,3 +69,4 @@ backend/public.key
 
 # Ignore auth_config.json
 auth_config.json
+frontend\src\Auth\auth_config.json
