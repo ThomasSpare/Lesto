@@ -26,8 +26,12 @@ const Contacts = () => {
               <img 
                 src="https://upload.wikimedia.org/wikipedia/en/0/03/Flag_of_Italy.svg" 
                 alt="Italian Flag" 
+<<<<<<< HEAD
                 style={{ width: "40px", height: "auto" }}
                 className="flag"
+=======
+                style={{ width: "40px", height: "auto" }} 
+>>>>>>> 64491494059ec97f019ddbdba5d3e57905b1a249
               />
             </div>
                 <br />

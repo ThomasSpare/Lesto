@@ -14,6 +14,7 @@
     font-size: x-large !important;
     margin-bottom: 2vh;
 }
+
 .contacts-text-section a {
     font-size: x-large;
     margin-bottom: 5vh;
@@ -21,7 +22,9 @@
 
 .mailto {
     font-size: larger !important;
+    color: blue;
 }
+<<<<<<< HEAD
 @media screen and (max-width: 768px){
 
     .flag{
@@ -30,3 +33,12 @@
         margin-right: 10px !important;
     }
 }
+=======
+
+@media screen and (max-width: 768px) {
+    #root>div.text-page>main>div>div>img {
+        height: 20px !important;
+    }
+
+}
+>>>>>>> 64491494059ec97f019ddbdba5d3e57905b1a249
