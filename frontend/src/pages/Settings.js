@@ -35,14 +35,8 @@ const Dashboard = () => {
 
   const allowedEmails = useMemo(
     () => ({
-      "che@chalmers.se": "Christian Ekberg",
       "tretegan@chalmers.se": "Teodora Retegan Vollmer",
-      "demaz@chalmers.se": "Christophe Demazière",
-      "sophie.grape@physics.uu.se": "Sophie Grape",
-      "mattias.thuvander@chalmers.se": "Mattias Thuvander",
-      "charlotta.nilsson@fysik.lu.se": "Charlotta Nilsson",
-      "jana.peroutkova@evalion.cz": "Jana Peroutková",
-      "petr.koran@evalion.cz": "Petr Kořán",
+      "simone.gianfelici@enea.it": "Simone Gianfelici",
       "t.spare.jkpg@gmail.com": "Thomas Spåre",
     }),
     []
