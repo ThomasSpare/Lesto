@@ -14,8 +14,9 @@
 
 .header .branding, header .branding {
   display: block;
-  margin-left: 27vw;
+  margin-left: 40vw;
   height: auto !important;
+  position: absolute;
 }
 
 
