@@ -1,3 +1,29 @@
+@media screen and (max-width: 768px){
+   #root > div.container.mx-auto.px-4.py-8 > div > main > section > section > div{
+        height: 70vh;
+   }
+   #news-date{
+        font-size: small !important;
+        height: 5vh;
+   }
+   #news-box-home{
+        height: 26vh;
+   }
+   
+   #dots{
+            margin-bottom: 140px;
+        }
+    }
+
+@media screen and (max-width: 425px){
+        #dots{
+            margin-bottom: 140px;
+        }
+        #news-date{
+            height: 22vh;
+        }
+    }
+    
 
 
 

@@ -422,7 +422,7 @@ body.dark h2 {
   flex: 0 0 auto !important;
   min-width: 10.5rem !important;
   height: 16vh !important;
-  z-index: 1000;
+  z-index: 1;
   padding: 0 !important;
 }
 
