@@ -108,6 +108,11 @@ function Home() {
       {/* Content box below image */}
       <div className="bg-white p-6 rounded-lg shadow-lg">
         <h3 className="text-xl font-bold mb-2">{news[activeIndex].title}</h3>
+        <Link
+        style={{ fontFamily: "Barlow, sans-serif !important", fontSize: "12px", lineHeight: "1.5", color: "#333" }}
+          to={`/news/${news[activeIndex].id}`}
+          className="text-black-600 hover:text-blue-800 transition-colors duration-200"
+        >
         <div
           className="prose max-w-none mb-4"
           dangerouslySetInnerHTML={{
@@ -115,19 +120,9 @@ function Home() {
               news[activeIndex].content?.length > 200
                 ? `${news[activeIndex].content.substring(0, 200)}...`
                 : news[activeIndex].content || "<p>Article content unavailable</p>",
-          }}
+              }}
         />
-        <div className="flex justify-between items-center">
-          <Link
-            to={`/news/${news[activeIndex].id}`}
-            className="text-blue-600 hover:text-blue-800 transition-colors duration-200"
-          >
-            read more
-          </Link>
-          <p className="text-gray-500 text-sm">
-            {new Date(news[activeIndex].created_at).toLocaleDateString()}
-          </p>
-        </div>
+        </Link>
       </div>
 
       {/* Navigation dots */}
@@ -141,6 +136,17 @@ function Home() {
           />
         ))}
       </div>
+              <div className="flex justify-between items-center">
+                <Link
+                  to={`/news/${news[activeIndex].id}`}
+                  className="text-blue-600 hover:text-blue-800 transition-colors duration-200"
+                >
+                  read more
+                </Link>
+                <p className="text-gray-500 text-sm">
+                  {new Date(news[activeIndex].created_at).toLocaleDateString()}
+                </p>
+              </div>
     </div>
   ) : (
     <p className="text-center text-gray-500 italic">No news available</p>

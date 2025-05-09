@@ -12,7 +12,7 @@ const SelectedNews = () => {
   useEffect(() => {
     const fetchArticle = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_API_MOCK === 'true'}/api/news/${id}`);
+        const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL || ''}/api/news/${id}`);
         setArticle(response.data);
       } catch (error) {
         console.error("Error fetching article:", error);

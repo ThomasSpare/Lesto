@@ -55,7 +55,7 @@ const AllNews = () => {
             </div>
             <main className="content">
                 {articles.map((article) => (
-                    <div key={article.id} className="news-article">
+                    <div key={article.id} className="news-article-all">
                         <img
                             style={{ padding: "2px", borderRadius: "5px" }}
                             src={article.image_url}
