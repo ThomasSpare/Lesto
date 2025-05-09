@@ -38,6 +38,48 @@ const Upload = () => {
   
   }, [isAuthenticated, user]);
 
+  // Particle Animation
+  
+  useEffect(() => {
+    const createParticle = () => {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      
+      // Random size between 5 and 20px
+      const size = Math.random() * 15 + 5;
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
+      
+      // Random position
+      particle.style.left = `${Math.random() * 100}vw`;
+      particle.style.top = `${Math.random() * 100}vh`;
+      
+      // Random animation duration between 8 and 12 seconds
+      particle.style.animationDuration = `${Math.random() * 4 + 8}s`;
+      
+      document.querySelector('.Center').appendChild(particle);
+      
+      // Remove particle after animation
+      setTimeout(() => {
+        particle.remove();
+      }, 12000);
+    };
+
+    // Create new particles every 500ms
+    const interval = setInterval(() => {
+      if (document.querySelector('.Center')) {
+        createParticle();
+      }
+    }, 500);
+
+    // Initial particles
+    for (let i = 0; i < 20; i++) {
+      createParticle();
+    }
+
+    return () => clearInterval(interval);
+  }, []);
+
   const handleUpload = async (event) => {
     event.preventDefault();
     if (files.length === 0 || !author || !category) {

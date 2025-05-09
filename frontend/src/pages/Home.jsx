@@ -14,6 +14,50 @@ import "./Home.css";
 function Home() {
   const [news, setNews] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
+
+
+  // Particle effect for the background
+
+ useEffect(() => {
+    const createParticle = () => {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      
+      // Larger size range for more variety
+      const size = Math.random() * 15 + 5;
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
+      
+      // Random position across the full viewport
+      particle.style.left = `${Math.random() * 100}vw`;
+      particle.style.top = `${Math.random() * 100}vh`;
+      
+      // Varied animation duration
+      particle.style.animationDuration = `${Math.random() * 6 + 6}s`;
+      
+      document.querySelector('.container').appendChild(particle);
+      
+      // Remove particle after animation
+      setTimeout(() => {
+        particle.remove();
+      }, 12000);
+    };
+
+    // Create new particles more frequently
+    const interval = setInterval(() => {
+      if (document.querySelector('.container')) {
+        createParticle();
+      }
+    }, 400);  // Increased frequency
+
+    // More initial particles
+    for (let i = 0; i < 25; i++) {  // Increased initial count
+      createParticle();
+    }
+
+    return () => clearInterval(interval);
+  }, []);
+
   
   useEffect(() => {
     if (news.length > 0) {
@@ -65,10 +109,11 @@ function Home() {
   }, []);
 
   return (
+  <div className="container">
     <div className="container mx-auto px-4 py-8">
       <div className="min-h-screen">
         <main className="max-w-4xl mx-auto">
-          <h1 class ="fade-in-left" 
+          <h1 class ="fade-in-left text-white" 
          >Advancing lead fast reactor technology</h1>
           
           <section style={{ borderBottomRightRadius: "1.0rem", marginTop: "10vh" }} className="bg-white shadow-md p-6">
@@ -163,6 +208,7 @@ function Home() {
         </main>
       </div>
     </div>
+  </div>
   );
 }
 

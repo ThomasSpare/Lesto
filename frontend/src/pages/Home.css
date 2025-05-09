@@ -1,3 +1,48 @@
+.container {
+    position: relative;
+    overflow: hidden;
+    background: #1a2f48;
+    min-height: calc(100vh - 64px); /* Subtract navbar height */
+    margin-top: 64px; /* Add margin for navbar */
+    width: 100%;
+}
+
+.particle {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(72, 191, 250, 0.15);
+    pointer-events: none;
+    animation: float 8s infinite;
+    z-index: 0;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 0.15;
+    }
+    50% {
+        transform: translateY(-100px) translateX(100px) rotate(180deg);
+        opacity: 0.25;  /* Slight glow effect at peak */
+    }
+    100% {
+        transform: translateY(0) translateX(0) rotate(360deg);
+        opacity: 0.15;
+    }
+}
+
+section.bg-white {
+    position: relative;
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.95);  /* Slightly transparent white */
+}
+
+/* Add z-index to ensure content stays above particles */
+.main {
+    position: relative;
+    z-index: 1;
+}
+
 @media screen and (max-width: 768px){
    #root > div.container.mx-auto.px-4.py-8 > div > main > section > section > div{
         height: 70vh;
