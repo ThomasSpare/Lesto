@@ -26,7 +26,7 @@ const ViewImg = () => {
               scope: "read:files",
             },
           });
-        const serverAddress = process.env.REACT_APP_API_MOCK === 'true'; // Update this to your server address
+        const serverAddress = process.env.REACT_APP_API_BASE_URL || 'http://localhost:10000';
         const url = `${serverAddress}/api/uploads/${fileKey}`;
             const response = await fetch(url, { 
                 signal,

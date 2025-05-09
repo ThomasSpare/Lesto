@@ -25,7 +25,7 @@ const Search = () => {
   const { user, getAccessTokenSilently, loginWithRedirect } = useAuth0();
   
   const api = axios.create({
-    baseURL: process.env.REACT_APP_API_MOCK === 'true', // Fallback to localhost if the environment variable is not set
+    baseURL: process.env.REACT_APP_API_BASE_URL || 'http://localhost:10000',
   });
 
   useEffect(() => {
