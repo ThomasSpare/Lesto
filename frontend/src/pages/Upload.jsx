@@ -26,7 +26,7 @@ const Upload = () => {
   const { getAccessTokenSilently, isAuthenticated, loginWithRedirect, user } = useAuth0();
 
   const api = axios.create({
-    baseURL: process.env.process.env.REACT_APP_API_BASE_URL || 'http://localhost:10000',
+    baseURL: process.env.REACT_APP_API_BASE_URL || 'http://localhost:10000',
   });
 
   useEffect(() => {
