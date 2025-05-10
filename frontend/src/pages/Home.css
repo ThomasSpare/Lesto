@@ -5,6 +5,7 @@
     min-height: calc(100vh - 64px); /* Subtract navbar height */
     margin-top: 64px; /* Add margin for navbar */
     width: 100%;
+    z-index: 0;
 }
 
 .particle {

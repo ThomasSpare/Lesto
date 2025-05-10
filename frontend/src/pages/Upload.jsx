@@ -139,7 +139,12 @@ const Upload = () => {
           window.location.href = `${process.env.REACT_APP_API_BASE_URL}/search`;
       }
     } catch (error) {
+      console.log('token', error);
       console.error('Error uploading files:', error);
+      console.error('Error response:', error.response);
+      console.error('Error message:', error.message);
+      console.error('Error config:', error.config);
+      console.error('Error request:', error.request);
       alert('An error occurred while uploading files. Please try again.');
     }
   };
