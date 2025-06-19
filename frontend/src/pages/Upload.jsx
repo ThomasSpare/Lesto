@@ -135,9 +135,6 @@ const Upload = () => {
           </>
         )}
         <div className="horizontal-container">
-        <div style={{ color: 'orange', marginBottom: '10px' }}>
-          Important note! Files selected for upload must not contain space between words. Use _ or - instead.
-        </div>
           <select
             id="workpackage"
             value={workpackage}
