@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { saveAs } from 'file-saver';
 import { CdsButton } from '@cds/react/button';
@@ -25,7 +25,7 @@ const Search = () => {
   const { user, getAccessTokenSilently, loginWithRedirect } = useAuth0();
   
   const api = axios.create({
-    baseURL: process.env.REACT_APP_API_BASE_URL || 'http://localhost:10000',
+    baseURL: process.env.REACT_APP_API_BASE_URL || 'http://localhost:10000', // Fallback to localhost if the environment variable is not set
   });
 
   useEffect(() => {
@@ -72,11 +72,10 @@ const Search = () => {
 
   useEffect(() => {
     if (user) {
-      const user_nickname = user.nickname.replace('.', ' ').replace(/\b\w/g, char => char.toUpperCase());
-      setUserNickname(user_nickname);
-      // User details can be used here if needed
+      const nickname = user.nickname.replace('.', ' ').replace(/\b\w/g, char => char.toUpperCase());
+      setUserNickname(nickname);
     }
-  }, [user, user_nickname]);
+  }, [user]);
 
   const handleFolderClick = (folderId) => {
     setExpandedFolders((prevExpandedFolders) => ({
@@ -129,9 +128,8 @@ const Search = () => {
     }
   };
 
-  const handleDeleteClick = async (id, user, author, user_nickname) => {
-    if (user_nickname !== author) {
-      alert('You can only delete files that you have uploaded');
+  const handleDeleteClick = async (id, type, author, nickname) => {
+    if (nickname !== author) {
       return;
     }
     const confirmDelete = window.confirm('Are you sure you want to delete this item?');
@@ -233,13 +231,19 @@ const Search = () => {
             />
           </label>
         </div>
-        <div className="list-header" style={{ display: 'flex', justifyContent: 'space-between', padding: '10px', backgroundColor: '#f0f0f0', fontWeight: 'bold' }}>
+        <div className="list-header" style={{ 
+          display: 'flex', 
+          justifyContent: 'space-between', 
+          padding: '10px', 
+          backgroundColor: '#f0f0f0', 
+          fontWeight: 'bold' 
+        }}>
           <span style={{ flex: '2.5' }}>Title</span>
           <span style={{ flex: '1.3' }}>Author</span>
           <span style={{ flex: '1.3' }}>Upload Date</span>
           <span style={{ flex: '1' }}>Type of work</span>
           <span style={{ flex: '1.5' }}>Download</span>
-          <span style={{ flex: '0.5' }}>File Type</span>
+          <span style={{ width: '80px', textAlign: 'center' }}>Actions</span>
         </div>
         <ol>
           {paginatedItems.map((item, index) => (
@@ -265,20 +269,26 @@ const Search = () => {
                   {item.is_publication && 'Publication '}
                   {item.is_template && 'Template'}
                 </p>
-                <p style={{ flex: '0.5', display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+                <p style={{ 
+                  width: '80px',
+                  display: 'flex', 
+                  justifyContent: 'center', 
+                  alignItems: 'center',
+                  gap: '8px'
+                }}>
                   {item.type === 'folder' && (
                     <>
                       <FontAwesomeIcon 
                         className='folder' 
                         icon={expandedFolders[item.id] ? faFolderOpen : faFolder} 
-                        style={{ cursor: 'pointer', marginLeft: '10px', color: 'coral' }} 
+                        style={{ cursor: 'pointer', color: 'coral' }} 
                         onClick={() => handleFolderClick(item.id)} 
                       />
                       <FontAwesomeIcon 
                         className='download' 
                         icon={faDownload} 
                         onClick={(e) => { e.stopPropagation(); handleDownloadClick(item); }} 
-                        style={{ cursor: 'pointer', color: 'blue', marginLeft: '10px' }} 
+                        style={{ cursor: 'pointer', color: 'blue' }} 
                       />
                     </>
                   )}
@@ -290,7 +300,7 @@ const Search = () => {
                         e.stopPropagation(); 
                         handleDeleteClick(item.id, item.type, item.author, user_nickname); 
                       }} 
-                      style={{ cursor: 'pointer', color: 'red', marginLeft: '10px' }} 
+                      style={{ cursor: 'pointer', color: 'red' }} 
                     />
                   )}
                 </p>

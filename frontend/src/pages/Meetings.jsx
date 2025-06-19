@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { CdsButton } from '@cds/react/button'; // Ensure this is the correct import for your button component
 import { useNavigate } from 'react-router-dom';
-import ReactCountryFlag from 'react-country-flag';
-import { getCountryCode } from '../countrycodes/countryCodes'; // Import the utility function
+import { useAuth0 } from '@auth0/auth0-react';
 import "./Search.css";
 import "../App.css"; 
 
@@ -13,37 +12,70 @@ const Meetings = () => {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
+  const { getAccessTokenSilently, loginWithRedirect } = useAuth0();
   const itemsPerPage = 20;
   const navigate = useNavigate();
 
   const api = axios.create({
-    baseURL: process.env.REACT_APP_API_BASE_URL || 'http://localhost:10000',
+    baseURL: process.env.REACT_APP_API_BASE_URL,
   });
 
-  useEffect(() => {
-    // Fetch uploads from the server
-    const fetchUploads = async () => {
-      try {
-        const response = await api.get('/api/uploads');
-        const data = response.data;
-        setUploads(data);
-      } catch (error) {
-        console.error('Error fetching uploads:', error);
-      }
-    };
+useEffect(() => {
+  // Fetch uploads from the server
+  const fetchUploads = async () => {
+    try {
+      const token = await getAccessTokenSilently({
+        authorizationParams: {
+          audience: process.env.REACT_APP_AUTH0_AUDIENCE,
+          scope: "read:files read:folders",
+        },
+      });
 
-    fetchUploads();
-  }, [api]);
+      const headers = {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      };
+
+      const response = await api.get('/api/uploads', { headers });
+      const data = response.data.files;
+      setUploads(data);
+    } catch (error) {
+      console.error('Error fetching uploads:', error);
+      if (error.error === 'consent_required') {
+        await loginWithRedirect({
+          authorizationParams: {
+            audience: process.env.REACT_APP_AUTH0_AUDIENCE,
+            scope: "openid profile email read:files read:folders",
+            prompt: "consent"
+          },
+          appState: {
+            returnTo: window.location.pathname
+          }
+        });
+      }
+    }
+  };
+
+  fetchUploads();
+}, [getAccessTokenSilently, loginWithRedirect]);
 
 const handleFileClick = (upload) => {
-    const fileExtension = upload.file_url ? upload.file_url.split('.').pop() : '';
-    if (fileExtension === 'txt', 'doc', 'docx', 'xls', 'xlsx', 'csv') {
-        navigate(`/view-text/${upload.id}/${upload.file_key}`);
-    } else if (fileExtension === 'pdf') {
-        navigate(`/view-pdf/${upload.id}/${upload.file_key}`);
-    } else {
-        console.warn('Unsupported file type:', fileExtension);
-    }
+  const fileExtension = upload.file_url ? upload.file_url.split('.').pop() : '';
+  if (['txt', 'doc', 'docx', 'xls', 'xlsx', 'csv'].includes(fileExtension)) {
+    navigate(`/view-text/${upload.id}/${upload.file_key}`);
+  } else if (fileExtension === 'pdf') {
+    navigate(`/view-pdf/${upload.id}/${upload.file_key}`);
+  } else if (upload.file_url) {
+    // For all other file extensions, download the file
+    const link = document.createElement('a');
+    link.href = upload.file_url;
+    link.download = upload.file_key || '';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  } else {
+    console.warn('Unsupported file type:', fileExtension);
+  }
 };
 
   const handlePreviousPage = () => {
@@ -141,9 +173,6 @@ const handleFileClick = (upload) => {
                 </p>
                 <p style={{ flex: '0.75' }}>
                   {upload.file_url ? upload.file_url.split('.').pop() : 'N/A'}
-                </p>
-                <p style={{ flex: '0.75', display: 'flex', justifyContent: 'flex-end', gap: '10px', marginTop: '0px !important' }}>
-                  {upload.country} <ReactCountryFlag countryCode={getCountryCode(upload.country)} svg />
                 </p>
               </div>
             </li>

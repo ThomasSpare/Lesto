@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { CdsButton } from '@cds/react/button';
 import { useNavigate } from 'react-router-dom';
-import ReactCountryFlag from 'react-country-flag';
-import { getCountryCode } from '../countrycodes/countryCodes';
 import { useAuth0 } from '@auth0/auth0-react'; // Add Auth0 import
 import "./Search.css";
 import "../App.css"; 
@@ -68,8 +66,18 @@ const Promotion = () => {
       navigate(`/view-ppt/${upload.id}/${encodedFileKey}`);
     } else if (fileExtension === 'jpg' || fileExtension === 'jpeg' || fileExtension === 'png' || fileExtension === 'gif') {
       navigate(`/view-img/${upload.id}/${encodedFileKey}`);
-    } else {
+    } else if (fileExtension === 'pdf') {
       navigate(`/view-pdf/${upload.id}/${encodedFileKey}`);
+    } else if (upload.file_url) {
+      // For all other file extensions, download the file
+      const link = document.createElement('a');
+      link.href = upload.file_url;
+      link.download = upload.file_key || '';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } else {
+      console.warn('Unsupported file type:', fileExtension);
     }
   };
 
@@ -168,9 +176,6 @@ const Promotion = () => {
                 </p>
                 <p style={{ flex: '0.75' }}>
                   {upload.file_url ? upload.file_url.split('.').pop() : 'N/A'}
-                </p>
-                <p style={{ flex: '0.75', display: 'flex', justifyContent: 'flex-end', gap: '10px', marginTop: '0px !important' }}>
-                  {upload.country} <ReactCountryFlag countryCode={getCountryCode(upload.country)} svg />
                 </p>
               </div>
             </li>

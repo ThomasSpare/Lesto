@@ -19,7 +19,7 @@ const WP3 = () => {
   const navigate = useNavigate();
 
   const api = axios.create({
-    baseURL: process.env.REACT_APP_API_MOCK === 'true',
+    baseURL: process.env.REACT_APP_API_BASE_URL,
   });
 
   useEffect(() => {
@@ -61,12 +61,27 @@ const WP3 = () => {
   }, [getAccessTokenSilently, loginWithRedirect, api]);
 
   const handleFileClick = (upload) => {
-    if (upload.file_url && (upload.file_url.split('.').pop() === 'ppt' || upload.file_url.split('.').pop() === 'pptx')) {
-      navigate(`/view-ppt/${upload.id}/${upload.file_key}`);
-    } else {
-      navigate(`/view-pdf/${upload.id}/${upload.file_key}`);
+    const fileExtension = upload.file_url.split('.').pop().toLowerCase();
+    const encodedFileKey = encodeURIComponent(upload.file_key);
+    
+    if (fileExtension === 'ppt' || fileExtension === 'pptx') {
+        navigate(`/view-ppt/${upload.id}/${encodedFileKey}`);
+    } else if (fileExtension === 'pdf') {
+        navigate(`/view-pdf/${upload.id}/${encodedFileKey}`);
+    } else if (['txt', 'doc', 'docx', 'rtf', 'odt'].includes(fileExtension)) {
+        navigate(`/view-text/${upload.id}/${encodedFileKey}`);
+    } else if (upload.file_url) {
+    // For all other file extensions, download the file
+    const link = document.createElement('a');
+    link.href = upload.file_url;
+    link.download = upload.file_key || '';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  } else {
+    console.warn('Unsupported file type:', fileExtension);
     }
-  };
+};
 
   const handlePreviousPage = () => {
     setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));

@@ -2,16 +2,13 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { CdsButton } from '@cds/react/button';
 import { useNavigate } from 'react-router-dom';
-import ReactCountryFlag from 'react-country-flag';
-import { getCountryCode } from '../countrycodes/countryCodes';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDownload } from '@fortawesome/free-solid-svg-icons';
+import { useAuth0 } from '@auth0/auth0-react';
 import './SearchPowerPoint.css';
 import '../App.css';
 
 
 const api = axios.create({
-  baseURL: process.env.REACT_APP_API_BASE_URL || 'http://localhost:10000',
+  baseURL: process.env.REACT_APP_API_BASE_URL,
 });
 
 const SearchPowerPoint = () => {
@@ -21,14 +18,26 @@ const SearchPowerPoint = () => {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
+  const { getAccessTokenSilently, loginWithRedirect } = useAuth0()
   const itemsPerPage = 20;
 
   useEffect(() => {
     // Fetch uploads from the server
     const fetchUploads = async () => {
       try {
-        const response = await api.get('/api/uploads');
-        const data = response.data;
+        const token = await getAccessTokenSilently({
+          authorizationParams: {
+            audience: process.env.REACT_APP_AUTH0_AUDIENCE,
+            scope: "read:files read:folders",
+          },
+        });
+        const headers = {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        };
+
+        const response = await api.get('/api/uploads', { headers });
+        const data = response.data.files;
         setUploads(data.filter(upload => upload.is_template));
       } catch (error) {
         console.error('Error fetching uploads:', error);
@@ -36,27 +45,28 @@ const SearchPowerPoint = () => {
     };
 
     fetchUploads();
-  }, []);
+  }, [getAccessTokenSilently, loginWithRedirect]);
 
-  const handleDownloadClick = async (upload) => {
-    const confirmDownload = window.confirm('Do you want to download this file?');
-    if (confirmDownload) {
-      try {
-        const response = await api.get(`/api/uploads/${upload.file_key}`, {
-          responseType: 'blob',
-        });
-        const url = window.URL.createObjectURL(new Blob([response.data]));
-        const link = document.createElement('a');
-        link.href = url;
-        link.setAttribute('download', upload.file_url.split('/').pop());
-        document.body.appendChild(link);
-        link.click();
-        link.remove();
-      } catch (error) {
-        console.error('Error downloading file:', error);
-      }
-    }
-  };
+
+const handleFileClick = (upload) => {
+  const fileExtension = upload.file_url ? upload.file_url.split('.').pop().toLowerCase() : '';
+  const textExtensions = ['txt', 'doc', 'docx', 'xls', 'xlsx', 'csv'];
+  if (textExtensions.includes(fileExtension)) {
+    navigate(`/view-text/${upload.id}/${upload.file_key}`);
+  } else if (fileExtension === 'pdf') {
+    navigate(`/view-pdf/${upload.id}/${upload.file_key}`);
+  } else if (upload.file_url) {
+    // For all other file extensions, download the file
+    const link = document.createElement('a');
+    link.href = upload.file_url;
+    link.download = upload.file_key || '';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  } else {
+    console.warn('Unsupported file type:', fileExtension);
+  }
+};
 
   const handlePreviousPage = () => {
     setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
@@ -141,7 +151,7 @@ const SearchPowerPoint = () => {
         </div>
         <ol>
           {paginatedUploads.map((upload, index) => (
-            <li className="search-list-item" key={index}>
+            <li className="search-list-item" key={index} onClick={() => handleFileClick(upload)}>
               <div className='list-info' style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <p style={{ flex: '2', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                   {upload.category.length > 65 ? `${upload.category.substring(0, 65)}...` : upload.category}
@@ -154,12 +164,6 @@ const SearchPowerPoint = () => {
                 </p>
                 <p style={{ flex: '0.75' }}>
                   {upload.file_url ? upload.file_url.split('.').pop() : 'N/A'}
-                </p>
-                <p style={{ flex: '0.75', display: 'flex', justifyContent: 'flex-end', gap: '10px', marginTop: '0px !important' }}>
-                  {upload.country} <ReactCountryFlag countryCode={getCountryCode(upload.country)} svg />
-                </p>
-                <p style={{ flex: '0.5', display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
-                  <FontAwesomeIcon className='download' icon={faDownload} onClick={() => handleDownloadClick(upload)} style={{ cursor: 'pointer' }} />
                 </p>
               </div>
             </li>

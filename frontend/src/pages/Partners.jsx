@@ -16,10 +16,10 @@ return (
             <div className="partner-box">
                 <div className="partners-links">
             <img id="kth" height={200} width={200} src="https://res.cloudinary.com/djunroohl/image/upload/v1746706552/PSI_kis5tq.png" alt="Partner logo" />
-            <a href="https://www.psi.ch/en" target="_blank" rel="noopener noreferrer">PAUL SCHERRER INSTITUT</a>
+            <a href="https://www.raten.ro/" target="_blank" rel="noopener noreferrer">REGIA AUTONOMA TEHNOLOGII PENTRU ENERGIA NUCLEARA - RATEN</a>
                 <img 
-                    src="https://upload.wikimedia.org/wikipedia/commons/f/f3/Flag_of_Switzerland.svg" 
-                    alt="Swiss Flag"
+                    src="https://upload.wikimedia.org/wikipedia/commons/f/f3/Flag_of_Romania.svg"
+                    alt="Romanian Flag" 
                     className="flag" 
                     height={20} 
                     width={30} 

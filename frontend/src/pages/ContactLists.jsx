@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { CdsButton } from '@cds/react/button'; // Ensure this is the correct import for your button component
 import { useNavigate } from 'react-router-dom';
-import ReactCountryFlag from 'react-country-flag';
-import { getCountryCode } from '../countrycodes/countryCodes'; // Import the utility function
+import { useAuth0 } from '@auth0/auth0-react';
+
 import "./ContactLists.css";
 import "../App.css"; 
 
@@ -14,6 +14,7 @@ const ContactList = () => {
     const [endDate, setEndDate] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 20;
+    const { getAccessTokenSilently, loginWithRedirect } = useAuth0(); // Add Auth0 hooks
     const navigate = useNavigate();
 
     const api = axios.create({
@@ -23,30 +24,64 @@ const ContactList = () => {
     useEffect(() => {
         // Fetch uploads from the server
         const fetchUploads = async () => {
-            try {
-                const response = await api.get('/api/uploads');
-                const data = response.data;
-                setUploads(data);
+                try {
+                    const token = await getAccessTokenSilently({
+                      authorizationParams: {
+                        audience: process.env.REACT_APP_AUTH0_AUDIENCE,
+                        scope: "read:files read:folders",
+                      },
+                    });
+            
+                    const headers = {
+                      'Authorization': `Bearer ${token}`,
+                      'Content-Type': 'application/json',
+                    };
+            
+                    const response = await api.get('/api/uploads', { headers });
+                    const data = response.data.files;
+                    setUploads(data);
             } catch (error) {
                 console.error('Error fetching uploads:', error);
+        if (error.error === 'consent_required') {
+          await loginWithRedirect({
+            authorizationParams: {
+              audience: process.env.REACT_APP_AUTH0_AUDIENCE,
+              scope: "openid profile email read:files read:folders",
+              prompt: "consent"
+            },
+            appState: {
+              returnTo: window.location.pathname
             }
-        };
-
-        fetchUploads();
-    }, [api]);
-
-    const handleFileClick = (upload) => {
-        const fileExtension = upload.file_url.split('.').pop().toLowerCase();
-        if (fileExtension === 'ppt' || fileExtension === 'pptx') {
-            navigate(`/view-ppt/${upload.id}/${upload.file_key}`);
-        } else if (fileExtension === 'pdf') {
-            navigate(`/view-pdf/${upload.id}/${upload.file_key}`);
-        } else if (['txt', 'doc', 'docx', 'rtf', 'odt'].includes(fileExtension)) {
-            navigate(`/view-text/${upload.id}/${upload.file_key}`);
-        } else {
-            console.error('Unsupported file type:', fileExtension);
+          });
         }
+      }
     };
+
+    fetchUploads();
+  }, [getAccessTokenSilently, loginWithRedirect]);
+
+  const handleFileClick = (upload) => {
+    const fileExtension = upload.file_url.split('.').pop().toLowerCase();
+    const encodedFileKey = encodeURIComponent(upload.file_key);
+    
+    if (fileExtension === 'ppt' || fileExtension === 'pptx') {
+        navigate(`/view-ppt/${upload.id}/${encodedFileKey}`);
+    } else if (fileExtension === 'pdf') {
+        navigate(`/view-pdf/${upload.id}/${encodedFileKey}`);
+    } else if (['txt', 'doc', 'docx', 'rtf', 'odt'].includes(fileExtension)) {
+        navigate(`/view-text/${upload.id}/${encodedFileKey}`);
+    } else if (upload.file_url) {
+    // For all other file extensions, download the file
+    const link = document.createElement('a');
+    link.href = upload.file_url;
+    link.download = upload.file_key || '';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  } else {
+    console.warn('Unsupported file type:', fileExtension);
+    }
+};
 
     const handlePreviousPage = () => {
         setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
@@ -144,10 +179,7 @@ const ContactList = () => {
                                 </p>
                                 <p style={{ flex: '0.75' }}>
                                     {upload.file_url ? upload.file_url.split('.').pop() : 'N/A'}
-                                </p>
-                                <p style={{ flex: '0.75', display: 'flex', justifyContent: 'flex-end', gap: '10px', marginTop: '0px !important' }}>
-                                    {upload.country} <ReactCountryFlag countryCode={getCountryCode(upload.country)} svg />
-                                </p>
+                                </p>                          
                             </div>
                         </li>
                     ))}

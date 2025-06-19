@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import "@cds/core/icon/register.js";
 import "@cds/core/dropdown/register.js";
@@ -12,53 +12,15 @@ import "../App.css";
 ClarityIcons.addIcons(loginIcon);
 
 const ModalAuth = () => {
-  const [isProcessingAuth, setIsProcessingAuth] = useState(false);
-  const {
-    loginWithRedirect,
-    logout,
-    isAuthenticated,
-    isLoading,
-    getAccessTokenSilently,
-    user,
-  } = useAuth0();
-
-  // Process authentication on page load - especially important after redirects
-  useEffect(() => {
-    // Only try to get token if authenticated and not already processing
-    if (isAuthenticated && !isProcessingAuth && !isLoading) {
-      setIsProcessingAuth(true);
-
-      const getToken = async () => {
-        try {
-          const token = await getAccessTokenSilently({
-            authorizationParams: {
-              audience: process.env.REACT_APP_AUTH0_AUDIENCE,
-              scope: "openid profile email read:files read:folders",
-            },
-          });
-          console.log("Authentication successful, token retrieved");
-          localStorage.setItem("auth_processed", "true");
-          setIsProcessingAuth(false);
-        } catch (error) {
-          console.error("Error getting token:", error);
-          setIsProcessingAuth(false);
-        }
-      };
-
-      getToken();
-    }
-  }, [isAuthenticated, isLoading, getAccessTokenSilently, isProcessingAuth]);
+  const { loginWithRedirect, logout, isAuthenticated, isLoading } = useAuth0();
 
   const handleLogin = async () => {
     try {
-      // Clear any existing auth state first
-      localStorage.removeItem("auth_processed");
-
       await loginWithRedirect({
         authorizationParams: {
           audience: process.env.REACT_APP_AUTH0_AUDIENCE,
           scope: "openid profile email read:files read:folders",
-          redirect_uri: process.env.REACT_APP_AUTH0_REDIRECT_URI,
+          redirect_uri: window.location.origin,
         },
       });
     } catch (error) {
@@ -69,7 +31,6 @@ const ModalAuth = () => {
 
   const handleLogout = async () => {
     try {
-      localStorage.removeItem("auth_processed");
       await logout({
         logoutParams: {
           returnTo: window.location.origin,

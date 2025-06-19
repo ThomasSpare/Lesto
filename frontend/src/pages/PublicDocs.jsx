@@ -3,8 +3,6 @@ import axios from 'axios';
 import { CdsButton } from '@cds/react/button';
 import { useNavigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
-import ReactCountryFlag from 'react-country-flag';
-import { getCountryCode } from '../countrycodes/countryCodes';
 import "./PublicDocs.css";
 import "../App.css"; 
 
@@ -16,71 +14,93 @@ const PublicDocs = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 20;
     const navigate = useNavigate();
-    const { getAccessTokenSilently, loginWithRedirect } = useAuth0();
+    const { getAccessTokenSilently, loginWithRedirect, isAuthenticated } = useAuth0();
 
     const api = axios.create({
-        baseURL: process.env.REACT_APP_API_BASE_URL || 'http://localhost:10000',
+        baseURL: process.env.REACT_APP_API_BASE_URL,
     });
 
     useEffect(() => {
         const fetchUploads = async () => {
-          try {
-            const token = await getAccessTokenSilently({
-              authorizationParams: {
-                audience: process.env.REACT_APP_AUTH0_AUDIENCE,
-                scope: "read:files read:folders",
-              },
-            });
+            try {
+                let headers = {
+                    'Content-Type': 'application/json',
+                };
     
-            const headers = {
-              'Authorization': `Bearer ${token}`,
-              'Content-Type': 'application/json',
-            };
-    
-            const response = await api.get('/api/uploads', { headers });
-            const data = response.data.files; // Access files array from response
-            setUploads(data);
-          } catch (error) {
-            console.error('Error fetching uploads:', error);
-            if (error.error === 'consent_required') {
-              await loginWithRedirect({
-                authorizationParams: {
-                  audience: process.env.REACT_APP_AUTH0_AUDIENCE,
-                  scope: "openid profile email read:files read:folders",
-                  prompt: "consent"
-                },
-                appState: {
-                  returnTo: window.location.pathname
+                if (isAuthenticated) {
+                    const token = await getAccessTokenSilently({
+                        authorizationParams: {
+                            audience: process.env.REACT_APP_AUTH0_AUDIENCE,
+                            scope: "read:files read:folders",
+                        },
+                    });
+                    headers['Authorization'] = `Bearer ${token}`;
                 }
-              });
+    
+                const response = await api.get('/api/uploads', { headers });
+                const data = response.data.files; // Access files array from response
+                setUploads(data.filter(upload => upload.PublicDocs));
+            } catch (error) {
+                console.error('Error fetching uploads:', error);
+                if (error.error === 'consent_required') {
+                    await loginWithRedirect({
+                        authorizationParams: {
+                            audience: process.env.REACT_APP_AUTH0_AUDIENCE,
+                            scope: "openid profile email read:files read:folders",
+                            prompt: "consent"
+                        },
+                        appState: {
+                            returnTo: window.location.pathname
+                        }
+                    });
+                } else {
+                    // Fetch public uploads if not authenticated
+                    const response = await api.get('/api/uploads');
+                    const data = response.data.files; // Access files array from response
+                    setUploads(data);
+                }
             }
-          }
         };
     
         fetchUploads();
-      }, [getAccessTokenSilently, loginWithRedirect, api]);
+    }, [getAccessTokenSilently, loginWithRedirect, api, isAuthenticated]);
 
-    const handleFileClick = (upload) => {
-        const fileType = upload.file_url ? upload.file_url.split('.').pop() : '';
-        const encodedFileKey = encodeURIComponent(upload.file_key);
-        switch (fileType) {
-            case 'pdf':
-                navigate(`/view-pdf/${upload.id}/${encodedFileKey}`);
-                break;
-            case 'jpg':
-            case 'jpeg':
-            case 'png':
-                navigate(`/view-image/${upload.id}/${encodedFileKey}`);
-                break;
-            case 'ppt':
-            case 'pptx':
-                navigate(`/view-ppt/${upload.id}/${encodedFileKey}`);
-                break;
-            default:
-                navigate(`/view-doc/${upload.id}/${encodedFileKey}`);
-                break;
-        }
-    };
+const handleFileClick = (upload) => {
+    const fileType = upload.file_url ? upload.file_url.split('.').pop().toLowerCase() : '';
+    const encodedFileKey = encodeURIComponent(upload.file_key);
+    switch (fileType) {
+        case 'pdf':
+            navigate(`/view-pdf/${upload.id}/${encodedFileKey}`);
+            break;
+        case 'jpg':
+        case 'jpeg':
+        case 'png':
+            navigate(`/view-image/${upload.id}/${encodedFileKey}`);
+            break;
+        case 'ppt':
+        case 'pptx':
+            navigate(`/view-ppt/${upload.id}/${encodedFileKey}`);
+            break;
+        case 'doc':
+        case 'docx':
+        case 'txt':
+            navigate(`/view-doc/${upload.id}/${encodedFileKey}`);
+            break;
+        default:
+            if (upload.file_url) {
+                // For all other file extensions, download the file
+                const link = document.createElement('a');
+                link.href = upload.file_url;
+                link.download = upload.file_key || '';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            } else {
+                console.warn('Unsupported file type:', fileType);
+            }
+            break;
+    }
+};
 
     const handlePreviousPage = () => {
         setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
@@ -177,9 +197,6 @@ const PublicDocs = () => {
                                 </p>
                                 <p style={{ flex: '0.75' }}>
                                     {upload.file_url ? upload.file_url.split('.').pop() : 'N/A'}
-                                </p>
-                                <p style={{ flex: '0.75', display: 'flex', justifyContent: 'flex-end', gap: '10px', marginTop: '0px !important' }}>
-                                    {upload.country} <ReactCountryFlag countryCode={getCountryCode(upload.country)} svg />
                                 </p>
                             </div>
                         </li>

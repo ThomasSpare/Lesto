@@ -3,9 +3,10 @@ import "./Upload.css";
 import "../App.css";
 import { CdsButton } from '@cds/react/button';
 import { useAuth0 } from '@auth0/auth0-react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
 const Upload = () => {
+  const navigate = useNavigate();
   const [files, setFiles] = useState([]);
   const [author, setAuthor] = useState('');
   const [uploadDate, setUploadDate] = useState('');
@@ -26,7 +27,7 @@ const Upload = () => {
   const { getAccessTokenSilently, isAuthenticated, loginWithRedirect, user } = useAuth0();
 
   const api = axios.create({
-    baseURL: process.env.REACT_APP_API_BASE_URL || 'http://localhost:10000',
+    baseURL: process.env.REACT_APP_API_BASE_URL,
   });
 
   useEffect(() => {
@@ -37,48 +38,6 @@ const Upload = () => {
     }
   
   }, [isAuthenticated, user]);
-
-  // Particle Animation
-  
-  useEffect(() => {
-    const createParticle = () => {
-      const particle = document.createElement('div');
-      particle.className = 'particle';
-      
-      // Random size between 5 and 20px
-      const size = Math.random() * 15 + 5;
-      particle.style.width = `${size}px`;
-      particle.style.height = `${size}px`;
-      
-      // Random position
-      particle.style.left = `${Math.random() * 100}vw`;
-      particle.style.top = `${Math.random() * 100}vh`;
-      
-      // Random animation duration between 8 and 12 seconds
-      particle.style.animationDuration = `${Math.random() * 4 + 8}s`;
-      
-      document.querySelector('.Center').appendChild(particle);
-      
-      // Remove particle after animation
-      setTimeout(() => {
-        particle.remove();
-      }, 12000);
-    };
-
-    // Create new particles every 500ms
-    const interval = setInterval(() => {
-      if (document.querySelector('.Center')) {
-        createParticle();
-      }
-    }, 500);
-
-    // Initial particles
-    for (let i = 0; i < 20; i++) {
-      createParticle();
-    }
-
-    return () => clearInterval(interval);
-  }, []);
 
   const handleUpload = async (event) => {
     event.preventDefault();
@@ -127,24 +86,19 @@ const Upload = () => {
           formData.append('folderName', folderName); // Add folder name to form data if multiple files
         }
   
-        const response = await api.post('/api/uploads', formData, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'multipart/form-data'
-          }
-        });
-  
-        if (response.status === 200) {
-          alert('Files uploaded successfully');
-          window.location.href = `${process.env.REACT_APP_API_BASE_URL}/search`;
+      const response = await api.post('/api/uploads', formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+
+      if (response.status === 200) {
+        alert('Files uploaded successfully');
+        navigate('/search');
       }
     } catch (error) {
-      console.log('token', error);
       console.error('Error uploading files:', error);
-      console.error('Error response:', error.response);
-      console.error('Error message:', error.message);
-      console.error('Error config:', error.config);
-      console.error('Error request:', error.request);
       alert('An error occurred while uploading files. Please try again.');
     }
   };

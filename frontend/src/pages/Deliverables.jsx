@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { CdsButton } from '@cds/react/button'; // Ensure this is the correct import for your button component
 import { useNavigate } from 'react-router-dom';
-import ReactCountryFlag from 'react-country-flag';
 import { useAuth0 } from '@auth0/auth0-react';
-import { getCountryCode } from '../countrycodes/countryCodes'; // Import the utility function
+
 import "./Deliverables.css";
 // import "../App.css"; 
 
@@ -19,7 +18,7 @@ const Deliverabels = () => {
     const navigate = useNavigate();
 
     const api = axios.create({
-        baseURL: process.env.REACT_APP_API_BASE_URL || 'http://localhost:10000',
+        baseURL: process.env.REACT_APP_API_BASE_URL,
     });
 
     useEffect(() => {
@@ -27,7 +26,7 @@ const Deliverabels = () => {
           try {
             const token = await getAccessTokenSilently({
               authorizationParams: {
-                audience: process.env.REACT_APP_API_MOCK,
+                audience: process.env.REACT_APP_AUTH0_AUDIENCE,
                 scope: "read:files read:folders",
               },
             });
@@ -159,9 +158,6 @@ const Deliverabels = () => {
                                 </p>
                                 <p style={{ display: 'inline-block', marginRight: '50px' }}>
                                     Upload Date: {new Date(upload.upload_date).toLocaleDateString()}
-                                </p>
-                                <p style={{ display: 'inline-block', marginRight: '50px' }}>
-                                    Country: {upload.country} <ReactCountryFlag countryCode={getCountryCode(upload.country)} svg />
                                 </p>
                             </div>
                         </li>
